@@ -16,8 +16,8 @@ createRoot(rootElement).render(
   <StrictMode>
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      {/* <BrowserRouter basename={import.meta.env.BASE_URL}> */}
-      <BrowserRouter>
+      <BrowserRouter basename={import.meta.env.BASE_URL}>
+        {/* <BrowserRouter> */}
         <App />
       </BrowserRouter>
     </ThemeProvider>
