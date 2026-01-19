@@ -7,6 +7,8 @@
     "dev": "vite",
     "prebuild": "node scripts/update-mui-variants.mjs",
     "build": "tsc -b && vite build",
+    "predeploy": "yarn build",
+    "deploy": "gh-pages -d dist",
     "lint": "eslint .",
     "preview": "vite preview",
     "format": "prettier . --write",
@@ -19,6 +21,7 @@
     "@emotion/styled": "^11.14.1",
     "@mui/icons-material": "^7.3.7",
     "@mui/material": "^7.3.7",
+    "gh-pages": "^6.3.0",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "react-router-dom": "^7.12.0"
@@ -38,5 +41,7 @@
     "typescript": "~5.9.3",
     "typescript-eslint": "^8.46.4",
     "vite": "^7.2.4"
-  }
+  },
+  "homepage": "https://brian00uni.github.io/story",
+  "packageManager": "yarn@1.22.22"
 }
