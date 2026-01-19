@@ -1,20 +1,17 @@
 // material
 import { useSetHeaderProps } from '@/models/headerContext';
 import {
-  Autocomplete,
-  Box,
-  Card,
-  Chip,
-  FormControlLabel,
-  FormGroup,
-  Grid,
-  List,
-  Slider,
-  Stack,
-  Switch,
-  TextField,
-  Typography,
-} from '@mui/material';
+  Masonry,
+  Timeline,
+  TimelineConnector,
+  TimelineContent,
+  TimelineDot,
+  TimelineItem,
+  TimelineOppositeContent,
+  TimelineSeparator,
+  timelineOppositeContentClasses,
+} from '@mui/lab';
+import { Box, Paper, styled } from '@mui/material';
 import { useEffect } from 'react';
 
 // ========= Dashboard ========= //
@@ -31,83 +28,77 @@ export default function Dashboard() {
     });
   }, [setHeaderProps]);
 
-  const options = [
-    { label: 'The Godfather', id: 1 },
-    { label: 'Pulp Fiction', id: 2 },
-  ];
+  const heights = [150, 30, 90, 70, 110, 150, 130, 80, 50, 90, 100, 150, 30, 50, 80];
 
-  const handleDelete = () => {
-    console.info('You clicked the delete icon.');
-  };
+  const Item = styled(Paper)(({ theme }) => ({
+    backgroundColor: '#fff',
+    ...theme.typography.body2,
+    padding: theme.spacing(0.5),
+    textAlign: 'center',
+    color: (theme.vars || theme).palette.text.secondary,
+    ...theme.applyStyles('dark', {
+      backgroundColor: '#1A2027',
+    }),
+  }));
 
   return (
-    <Grid container rowSpacing={4.5} columnSpacing={2.75}>
-      <Slider
-        aria-label="Temperature"
-        defaultValue={30}
-        valueLabelDisplay="auto"
-        shiftStep={30}
-        step={10}
-        marks
-        min={10}
-        max={110}
-      />
-
-      <FormGroup>
-        <FormControlLabel control={<Switch defaultChecked />} label="Label" />
-        <FormControlLabel required control={<Switch />} label="Required" />
-        <FormControlLabel disabled control={<Switch />} label="Disabled" />
-      </FormGroup>
-
-      {/* row 1 */}
-
-      <Autocomplete
-        disablePortal
-        options={options}
-        sx={{ width: 300 }}
-        renderInput={(params) => <TextField {...params} label="Movie" />}
-      />
-      <Grid size={{ xs: 12, md: 5, lg: 4 }}>
-        <Grid container sx={{ alignItems: 'center', justifyContent: 'space-between' }}>
-          <Grid>
-            <Typography variant="h5">Income Overview</Typography>
-          </Grid>
-          <Grid />
-        </Grid>
-
-        <Stack direction="row" spacing={1}>
-          <Chip label="Deletable" variant="isFocus" onDelete={handleDelete} />
-          <Chip label="Deletable" variant="outlined" onDelete={handleDelete} />
-          <Chip
-            label="Clickable Link"
-            component="a"
-            href="https://www.daum.net/"
-            variant="outlined"
-            clickable
-          />
-        </Stack>
-
-        <List>dddd</List>
-        <Card sx={{ mt: 2 }}>
-          <Box sx={{ p: 3, pb: 0 }}>
-            <Stack sx={{ gap: 2 }}>
-              <Typography variant="h6" color="text.secondary">
-                This Week Statistics
-              </Typography>
-              <Typography variant="h3">$7,650</Typography>
-            </Stack>
-          </Box>
-        </Card>
-      </Grid>
-
-      <Grid size={{ xs: 12, md: 5, lg: 4 }}>
-        <Grid container sx={{ alignItems: 'center', justifyContent: 'space-between' }}>
-          <Grid>
-            <Typography variant="h5">Transaction History</Typography>
-          </Grid>
-          <Grid />
-        </Grid>
-      </Grid>
-    </Grid>
+    <Box>
+      <Timeline
+        position="alternate"
+        sx={{
+          [`& .${timelineOppositeContentClasses.root}`]: {
+            flex: 1,
+          },
+        }}
+      >
+        <TimelineItem>
+          <TimelineOppositeContent color="textSecondary">09:30 am</TimelineOppositeContent>
+          <TimelineSeparator>
+            <TimelineDot />
+            <TimelineConnector />
+          </TimelineSeparator>
+          <TimelineContent>
+            <Masonry columns={4} spacing={2}>
+              {heights.map((height, index) => (
+                <Item key={index} sx={{ height }}>
+                  {index + 1}
+                </Item>
+              ))}
+            </Masonry>
+          </TimelineContent>
+        </TimelineItem>
+        <TimelineItem>
+          <TimelineOppositeContent color="textSecondary">10:00 am</TimelineOppositeContent>
+          <TimelineSeparator>
+            <TimelineDot color="primary" />
+            <TimelineConnector />
+          </TimelineSeparator>
+          <TimelineContent>Code</TimelineContent>
+        </TimelineItem>
+        <TimelineItem>
+          <TimelineOppositeContent color="textSecondary">12:00 pm</TimelineOppositeContent>
+          <TimelineSeparator>
+            <TimelineDot color="success" />
+            <TimelineConnector />
+          </TimelineSeparator>
+          <TimelineContent>Lunch</TimelineContent>
+        </TimelineItem>
+        <TimelineItem>
+          <TimelineOppositeContent color="textSecondary">03:00 pm</TimelineOppositeContent>
+          <TimelineSeparator>
+            <TimelineDot color="warning" />
+            <TimelineConnector />
+          </TimelineSeparator>
+          <TimelineContent>Review</TimelineContent>
+        </TimelineItem>
+        <TimelineItem>
+          <TimelineOppositeContent color="textSecondary">05:30 pm</TimelineOppositeContent>
+          <TimelineSeparator>
+            <TimelineDot color="secondary" />
+          </TimelineSeparator>
+          <TimelineContent>Wrap up</TimelineContent>
+        </TimelineItem>
+      </Timeline>
+    </Box>
   );
 }

@@ -1,7 +1,9 @@
+import DataPortfolio from '@/data/dataPortfolio';
 import LayoutPage from '@/layouts/layoutPage';
 import Main from '@/pages';
 import Settings from '@/pages/comm/Settings';
 import Dashboard from '@/pages/dashboard/Dashboard';
+import Portfolio from '@/pages/history/portfolio';
 import AlarmPage from '@/pages/sub/alarm';
 import Components from '@/pages/sub/components';
 import { Route, Routes } from 'react-router-dom';
@@ -35,6 +37,17 @@ const routes = [
   {
     path: '/alarm',
     element: <AlarmPage />,
+  },
+  // ################################################################
+  // #######  data View
+  // ################################################################
+  {
+    path: '/data-portfolio',
+    element: <DataPortfolio />,
+  },
+  {
+    path: '/history/portfolio',
+    element: <Portfolio />,
   },
 ];
 

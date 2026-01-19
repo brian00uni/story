@@ -72,6 +72,8 @@ export default function Header({ headerProps }: HeaderLayoutProps) {
   const secondaryNavItems = [
     { text: 'Alarm', to: '/alarm' },
     { text: 'Settings', to: '/settings' },
+    { text: 'DataPortfolio', to: '/data-portfolio' },
+    { text: 'Portfolio', to: '/history/portfolio' },
   ];
 
   const DrawerList = (
