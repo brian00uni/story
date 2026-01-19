@@ -1,0 +1,267 @@
+//font-size;
+$min-width: 36rem;
+$max-width: 102.4rem;
+$font-size10: 1rem;
+
+@mixin icons($width, $height, $url) {
+  display: inline-block;
+  width: $width !important;
+  height: $height !important;
+  background: url($url) no-repeat 0 0 !important;
+  background-size: 100% !important;
+}
+
+@mixin fontsSet($size, $weight) {
+  font-size: $size;
+  font-weight: $weight;
+}
+
+@mixin fontsSet1($size, $weight, $color) {
+  font-size: $size;
+  font-weight: $weight;
+  color: $color;
+}
+
+@mixin fontsSet2($size, $line-height, $color) {
+  font-size: $size;
+  line-height: $line-height;
+  color: $color;
+}
+
+@mixin fontStyle($class, $size, $line-height, $color) {
+  .font-#{$class} {
+    font-size: #{$size}rem !important;
+    line-height: #{$line-height}rem !important;
+    color: $color;
+  }
+}
+
+@mixin arrowLeft($left, $width, $height, $margin-top) {
+  content: '';
+  position: absolute;
+  left: $left;
+  top: 50%;
+  margin-top: $margin-top;
+  border-top: 1px solid #35352f;
+  border-right: 1px solid #35352f;
+  width: $width;
+  height: $height;
+  display: inline-block;
+  transform: rotate(225deg);
+}
+
+@mixin arrowDown($left, $width, $height, $margin-top) {
+  content: '';
+  position: absolute;
+  left: $left;
+  top: 50%;
+  margin-top: $margin-top;
+  border-top: 1px solid #35352f;
+  border-right: 1px solid #35352f;
+  width: $width;
+  height: $height;
+  display: inline-block;
+  transform: rotate(135deg);
+}
+
+@mixin arrowDownRight($right, $width, $height, $margin-top) {
+  content: '';
+  position: absolute;
+  right: $right;
+  top: 50%;
+  margin-top: $margin-top;
+  border-top: 1px solid #35352f;
+  border-right: 1px solid #35352f;
+  width: $width;
+  height: $height;
+  display: inline-block;
+  transform: rotate(135deg);
+}
+
+@mixin arrowUpRight($right, $width, $height, $margin-top) {
+  content: '';
+  position: absolute;
+  right: $right;
+  top: 50%;
+  margin-top: $margin-top;
+  border-top: 1px solid #35352f;
+  border-right: 1px solid #35352f;
+  width: $width;
+  height: $height;
+  display: inline-block;
+  transform: rotate(315deg);
+}
+
+@mixin arrowDownNew($right, $width, $height, $margin-top) {
+  content: '';
+  position: absolute;
+  right: $right;
+  top: calc(50% - 0.9rem);
+  // margin-top: $margin-top;
+  // width: $width;
+  // height: $height;
+  width: 1.6rem;
+  height: 1.6rem;
+  //margin-top: -0.8rem;
+  display: inline-block;
+  background: url('~/assets/images/icons/Icon_accordion_L01.png') no-repeat right center;
+  background-size: auto 100%;
+  transform: rotate(180deg);
+}
+
+@mixin arrowDownNew03($right) {
+  content: '';
+  position: absolute;
+  right: $right;
+  top: calc(50% - 0.9rem);
+  width: 1.6rem;
+  height: 1.6rem;
+  display: inline-block;
+  transition: transform 150ms ease-out;
+  background: url('~/assets/images/icons/Icon_accordion_down.png') no-repeat right center;
+  background-size: auto 100%;
+  transform: rotate(0deg);
+}
+
+@mixin arrowDownNew04($right) {
+  content: '';
+  position: absolute;
+  right: $right;
+  top: calc(50% - 0.9rem);
+  width: 1.6rem;
+  height: 1.6rem;
+  display: inline-block;
+  transition: transform 150ms ease-out;
+  background: url('~/assets/images/icons/Icon_accordion_16.png') no-repeat right center;
+  background-size: auto 100%;
+  transform: rotate(180deg);
+}
+
+@mixin arrowDownNew02($right) {
+  content: '';
+  position: absolute;
+  right: $right;
+  top: calc(50% - 1rem);
+  width: 2rem;
+  height: 2rem;
+  display: inline-block;
+  background: url('~/assets/images/icons/arrow-up.png') no-repeat center center;
+  background-size: auto 100%;
+  transform: rotate(180deg);
+}
+
+@mixin ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@mixin multiline-ellipsis($line) {
+  display: -webkit-box;
+  -webkit-line-clamp: $line;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+// grid mixin
+@mixin grid {
+  display: grid;
+}
+@mixin grid-1by {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+}
+@mixin grid-2by {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+@mixin grid-3by {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+@mixin grid-full {
+  grid-column: 1 / -1;
+}
+
+// flex mixin
+@mixin flex-full {
+  flex: 1;
+}
+
+@mixin flex {
+  display: flex;
+}
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+@mixin flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+@mixin flex-column {
+  display: flex;
+  flex-direction: column;
+}
+@mixin column-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+@mixin flex-columnReverse {
+  display: flex;
+  flex-direction: column-reverse;
+}
+@mixin flex-row {
+  flex-direction: row;
+}
+@mixin flex-wrap {
+  display: flex;
+  flex-wrap: wrap;
+}
+@mixin flex-nowrap {
+  display: flex;
+  flex-wrap: nowrap;
+}
+@mixin align-start {
+  display: flex;
+  align-items: flex-start;
+}
+@mixin align-center {
+  display: flex;
+  align-items: center;
+}
+@mixin align-end {
+  display: flex;
+  align-items: flex-end;
+}
+@mixin justify-start {
+  display: flex;
+  justify-content: flex-start;
+}
+@mixin justify-center {
+  display: flex;
+  justify-content: center;
+}
+@mixin justify-end {
+  display: flex;
+  justify-content: flex-end;
+}
+@mixin justify-between {
+  display: flex;
+  justify-content: space-between;
+}
+@mixin justify-evenly {
+  display: flex;
+  justify-content: space-evenly;
+}
+@mixin justify-around {
+  display: flex;
+  justify-content: space-around;
+}

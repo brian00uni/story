@@ -1,0 +1,107 @@
+@charset "UTF-8";
+@use 'sass:math';
+
+/* ───────────────────────── 설정 ───────────────────────── */
+
+$EASY_SYMMETRIC: true !default; // 음수는 -4px(대칭) 적용할지
+$rem-base: 10;
+
+@for $s from 1 through 50 {
+  // .text-#{$s}B {
+  //   font-size: $s * 1px !important;
+  // }
+  .m-n#{$s} {
+    margin: -$s * 0.1rem !important;
+  }
+  .mt-n#{$s} {
+    margin-top: -$s * 0.1rem !important;
+  }
+  .mb-n#{$s} {
+    margin-bottom: -$s * 0.1rem !important;
+  }
+  .ml-n#{$s} {
+    margin-left: -$s * 0.1rem !important;
+  }
+  .mr-n#{$s} {
+    margin-right: -$s * 0.1rem !important;
+  }
+}
+
+/* ───────────────────────── 사이즈 정의 ───────────────────────── */
+$sizes:
+  // 0,
+
+  1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27,
+  28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 56,
+  60, 70, 80, 86, 90, 96, 100, 110, 120, 124, 125, 130, 140, 150;
+
+/* ───────────────────────── 유틸 생성 Mixin ───────────────────────── */
+@mixin build-utils($add: 0) {
+  @each $s in $sizes {
+    .w-#{$s} {
+      width: $s * 0.1rem !important;
+    }
+    .h-#{$s} {
+      height: $s * 0.1rem !important;
+    }
+    .wp-#{$s} {
+      width: $s * 1% !important;
+    }
+
+    .gap-#{$s} {
+      gap: $s * 0.1rem !important;
+    }
+
+    .m-#{$s} {
+      margin: $s * 0.1rem !important;
+    }
+    .mt-#{$s} {
+      margin-top: $s * 0.1rem !important;
+    }
+    .mb-#{$s} {
+      margin-bottom: $s * 0.1rem !important;
+    }
+    .ml-#{$s} {
+      margin-left: $s * 0.1rem !important;
+    }
+    .mr-#{$s} {
+      margin-right: $s * 0.1rem !important;
+    }
+
+    .p-#{$s} {
+      padding: $s * 0.1rem !important;
+    }
+    .pt-#{$s} {
+      padding-top: $s * 0.1rem !important;
+    }
+    .pb-#{$s} {
+      padding-bottom: $s * 0.1rem !important;
+    }
+    .pl-#{$s} {
+      padding-left: $s * 0.1rem !important;
+    }
+    .pr-#{$s} {
+      padding-right: $s * 0.1rem !important;
+    }
+
+    .text-#{$s}L {
+      font-size: $s * 0.1rem !important;
+      font-weight: 300 !important;
+    }
+    .text-#{$s}R {
+      font-size: $s * 0.1rem !important;
+      font-weight: 400 !important;
+    }
+    .text-#{$s}M {
+      font-size: $s * 0.1rem !important;
+      font-weight: 500 !important;
+    }
+    .text-#{$s}B {
+      font-size: $s * 0.1rem !important;
+      font-weight: bold !important;
+    }
+  }
+}
+
+/* ───────────────────────── 유틸 출력 ───────────────────────── */
+@include build-utils(0); // 기본

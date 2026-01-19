@@ -1,0 +1,33 @@
+@use './_mixin' as *;
+
+//bulma mixin
+$body-size: 10px !default;
+$body-font-size: 1.4rem !default;
+
+//font-family
+// $font-main: 'Pretendard' !important;
+// $font-price: 'Pretendard' !important;
+
+//Font-color
+$primary: #0ac262;
+$secondary: #4889ff;
+$tertiary: #083484;
+
+$col-bg: #f2f4f6;
+$col-red: #f04452;
+$col-blue: #537fda;
+$col-white: #ffffff;
+$col-black: #000000;
+
+$col-gray0: #111111; // 1
+$col-gray1: #1c1c1c; // 28
+$col-gray2: #383838; // 56
+$col-gray3: #555555; // 85
+$col-gray4: #717171; // 113
+$col-gray5: #8d8d8d; // 141
+$col-gray6: #aaaaaa; // 170
+$col-gray7: #c6c6c6; // 198
+$col-gray8: #e2e2e2; // 226
+$col-gray9: #fafafa; // 250
+
+$box-shadow: 0 0.6rem 2rem 0 rgba(0, 0, 0, 0.08);

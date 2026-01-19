@@ -1,0 +1,169 @@
+@charset "UTF-8";
+
+/* NanumSquare */
+// Regular(400), Bold(700), Extra Bold(800), Light(300)
+@font-face {
+  font-family: 'NanumSquare';
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+  /* 폰트 메트릭 보정 (CSS Fonts L4, iOS/모던 크롬 지원) */
+  ascent-override: 83%;
+  descent-override: 17%;
+  line-gap-override: 0%;
+  size-adjust: 100%;
+  src: url('@/assets/fonts/NanumSquareL.eot');
+  src:
+    local('☺'),
+    url('@/assets/fonts/NanumSquareL.eot?#iefix') format('embedded-opentype'),
+    url('@/assets/fonts/NanumSquareL.woff2') format('woff2'),
+    url('@/assets/fonts/NanumSquareL.woff') format('woff'),
+    url('@/assets/fonts/NanumSquareL.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'NanumSquare';
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  /* 폰트 메트릭 보정 (CSS Fonts L4, iOS/모던 크롬 지원) */
+  ascent-override: 83%;
+  descent-override: 17%;
+  line-gap-override: 0%;
+  size-adjust: 100%;
+  src: url('@/assets/fonts/NanumSquareR.eot');
+  src:
+    local('☺'),
+    url('@/assets/fonts/NanumSquareR.eot?#iefix') format('embedded-opentype'),
+    url('@/assets/fonts/NanumSquareR.woff2') format('woff2'),
+    url('@/assets/fonts/NanumSquareR.woff') format('woff'),
+    url('@/assets/fonts/NanumSquareR.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'NanumSquare';
+  font-weight: bold; //500;
+  font-style: normal;
+  font-display: swap;
+  /* 폰트 메트릭 보정 (CSS Fonts L4, iOS/모던 크롬 지원) */
+  ascent-override: 83%;
+  descent-override: 17%;
+  line-gap-override: 0%;
+  size-adjust: 100%;
+  src: url('@/assets/fonts/NanumSquareR.eot');
+  src:
+    local('☺'),
+    url('@/assets/fonts/NanumSquareR.eot?#iefix') format('embedded-opentype'),
+    url('@/assets/fonts/NanumSquareR.woff2') format('woff2'),
+    url('@/assets/fonts/NanumSquareR.woff') format('woff'),
+    url('@/assets/fonts/NanumSquareR.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'NanumSquare';
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+  /* 폰트 메트릭 보정 (CSS Fonts L4, iOS/모던 크롬 지원) */
+  ascent-override: 83%;
+  descent-override: 17%;
+  line-gap-override: 0%;
+  size-adjust: 100%;
+  src: url('@/assets/fonts/NanumSquareB.eot');
+  src:
+    local('☺'),
+    url('@/assets/fonts/NanumSquareB.eot?#iefix') format('embedded-opentype'),
+    url('@/assets/fonts/NanumSquareB.woff2') format('woff2'),
+    url('@/assets/fonts/NanumSquareB.woff') format('woff'),
+    url('@/assets/fonts/NanumSquareB.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'NanumSquare';
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+  /* 폰트 메트릭 보정 (CSS Fonts L4, iOS/모던 크롬 지원) */
+  ascent-override: 83%;
+  descent-override: 17%;
+  line-gap-override: 0%;
+  size-adjust: 100%;
+  src: url('@/assets/fonts/NanumSquareEB.eot');
+  src:
+    local('☺'),
+    url('@/assets/fonts/NanumSquareEB.eot?#iefix') format('embedded-opentype'),
+    url('@/assets/fonts/NanumSquareEB.woff2') format('woff2'),
+    url('@/assets/fonts/NanumSquareEB.woff') format('woff'),
+    url('@/assets/fonts/NanumSquareEB.ttf') format('truetype');
+}
+
+/* AC */
+@font-face {
+  font-family: 'NanumSquareAc';
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  /* 폰트 메트릭 보정 (CSS Fonts L4, iOS/모던 크롬 지원) */
+  ascent-override: 83%;
+  descent-override: 17%;
+  line-gap-override: 0%;
+  size-adjust: 100%;
+  src: url('@/assets/fonts/NanumSquareAcR.eot');
+  src:
+    local('☺'),
+    url('@/assets/fonts/NanumSquareL.eot?#iefix') format('embedded-opentype'),
+    url('@/assets/fonts/NanumSquareAcR.woff2') format('woff2'),
+    url('@/assets/fonts/NanumSquareAcR.woff') format('woff'),
+    url('@/assets/fonts/NanumSquareAcR.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'NanumSquareAc';
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+  /* 폰트 메트릭 보정 (CSS Fonts L4, iOS/모던 크롬 지원) */
+  ascent-override: 83%;
+  descent-override: 17%;
+  line-gap-override: 0%;
+  size-adjust: 100%;
+  src: url('@/assets/fonts/NanumSquareAcB.eot');
+  src:
+    local('☺'),
+    url('@/assets/fonts/NanumSquareAcB.eot?#iefix') format('embedded-opentype'),
+    url('@/assets/fonts/NanumSquareAcB.woff2') format('woff2'),
+    url('@/assets/fonts/NanumSquareAcB.woff') format('woff'),
+    url('@/assets/fonts/NanumSquareAcB.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'NanumSquareAc';
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+  /* 폰트 메트릭 보정 (CSS Fonts L4, iOS/모던 크롬 지원) */
+  ascent-override: 83%;
+  descent-override: 17%;
+  line-gap-override: 0%;
+  size-adjust: 100%;
+  src: url('@/assets/fonts/NanumSquareAcEB.eot');
+  src:
+    local('☺'),
+    url('@/assets/fonts/NanumSquareAcEB.eot?#iefix') format('embedded-opentype'),
+    url('@/assets/fonts/NanumSquareAcEB.woff2') format('woff2'),
+    url('@/assets/fonts/NanumSquareAcEB.woff') format('woff'),
+    url('@/assets/fonts/NanumSquareAcEB.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'NanumSquareAc';
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+  /* 폰트 메트릭 보정 (CSS Fonts L4, iOS/모던 크롬 지원) */
+  ascent-override: 83%;
+  descent-override: 17%;
+  line-gap-override: 0%;
+  size-adjust: 100%;
+  src: url('@/assets/fonts/NanumSquareAcL.eot');
+  src:
+    local('☺'),
+    url('@/assets/fonts/NanumSquareAcL.eot?#iefix') format('embedded-opentype'),
+    url('@/assets/fonts/NanumSquareAcL.woff2') format('woff2'),
+    url('@/assets/fonts/NanumSquareAcL.woff') format('woff'),
+    url('@/assets/fonts/NanumSquareAcL.ttf') format('truetype');
+}
