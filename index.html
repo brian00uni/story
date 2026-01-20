@@ -5,7 +5,21 @@
     <link rel="icon" type="image/svg+xml" href="/story/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Brian Story</title>
-    <script type="module" crossorigin src="/story/assets/index-Dmy9EqF2.js"></script>
+    <script>
+      (function (l) {
+        if (l.search && l.search[1] === '/') {
+          var decoded = l.search
+            .slice(1)
+            .split('&')
+            .map(function (s) {
+              return s.replace(/~and~/g, '&');
+            })
+            .join('?');
+          window.history.replaceState(null, '', l.pathname + decoded + l.hash);
+        }
+      })(window.location);
+    </script>
+    <script type="module" crossorigin src="/story/assets/index-Co9A5xR-.js"></script>
     <link rel="stylesheet" crossorigin href="/story/assets/index-D3-fxQIW.css">
   </head>
   <body>
