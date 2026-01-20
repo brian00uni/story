@@ -4,6 +4,9 @@ import Main from '@/pages';
 import Settings from '@/pages/comm/Settings';
 import Dashboard from '@/pages/dashboard/Dashboard';
 import Portfolio from '@/pages/history/portfolio';
+import BoardList from '@/pages/board/List';
+import BoardView from '@/pages/board/View';
+import BoardWrite from '@/pages/board/Write';
 import AlarmPage from '@/pages/sub/alarm';
 import Components from '@/pages/sub/components';
 import { Route, Routes } from 'react-router-dom';
@@ -48,6 +51,22 @@ const routes = [
   {
     path: '/history/portfolio',
     element: <Portfolio />,
+  },
+  {
+    path: '/board',
+    element: <BoardList />,
+  },
+  {
+    path: '/board/write',
+    element: <BoardWrite />,
+  },
+  {
+    path: '/board/:id',
+    element: <BoardView />,
+  },
+  {
+    path: '/board/:id/edit',
+    element: <BoardWrite />,
   },
 ];
 

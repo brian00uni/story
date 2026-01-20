@@ -68,6 +68,7 @@ export default function Header({ headerProps }: HeaderLayoutProps) {
     { text: 'Home', to: '/' },
     { text: 'Dashboard', to: '/dashboard' },
     { text: 'Components', to: '/components' },
+    { text: 'Board', to: '/board' },
   ];
   const secondaryNavItems = [
     { text: 'Alarm', to: '/alarm' },
