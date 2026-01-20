@@ -1,4 +1,5 @@
 import { useSetHeaderProps } from '@/models/headerContext';
+import { readJson } from '@/utils/http';
 import { Box, Button, Stack, Typography } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
@@ -29,12 +30,12 @@ export default function BoardView() {
   useEffect(() => {
     if (!id) return;
     fetch(`/api/board/${id}`)
-      .then((res) => {
+      .then(async (res) => {
         if (!res.ok) throw new Error('Not found');
-        return res.json();
+        return await readJson<BoardItem>(res);
       })
       .then((json) => {
-        setItem(json);
+        setItem(json ?? null);
         setLoading(false);
       })
       .catch((err) => {

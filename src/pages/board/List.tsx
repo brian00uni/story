@@ -1,4 +1,5 @@
 import { useSetHeaderProps } from '@/models/headerContext';
+import { readJson } from '@/utils/http';
 import { Box, Button, List, ListItem, ListItemText, Stack, Typography } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
@@ -27,7 +28,12 @@ export default function BoardList() {
 
   useEffect(() => {
     fetch('/api/board')
-      .then((res) => res.json())
+      .then(async (res) => {
+        if (!res.ok) {
+          throw new Error(`Request failed (${res.status})`);
+        }
+        return (await readJson<BoardItem[]>(res)) ?? [];
+      })
       .then((json) => {
         setItems(Array.isArray(json) ? json : []);
         setLoading(false);

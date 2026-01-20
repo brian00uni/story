@@ -1,4 +1,5 @@
 import { useSetHeaderProps } from '@/models/headerContext';
+import { readJson } from '@/utils/http';
 import { Box, Button, Stack, TextField } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -24,10 +25,13 @@ export default function BoardWrite() {
     if (!id) return;
     setLoading(true);
     fetch(`/api/board/${id}`)
-      .then((res) => res.json())
+      .then(async (res) => {
+        if (!res.ok) throw new Error('Not found');
+        return await readJson<{ title?: string; content?: string }>(res);
+      })
       .then((json) => {
-        setTitle(json.title ?? '');
-        setContent(json.content ?? '');
+        setTitle(json?.title ?? '');
+        setContent(json?.content ?? '');
         setLoading(false);
       })
       .catch(() => {
@@ -44,9 +48,10 @@ export default function BoardWrite() {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload),
     });
-    const json = await res.json();
+    const json = await readJson<{ id?: number }>(res).catch(() => null);
     setLoading(false);
     if (!res.ok) return;
+    if (!json?.id) return;
     navigate(`/board/${json.id}`);
   };
 
