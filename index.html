@@ -15,7 +15,9 @@
               return s.replace(/~and~/g, '&');
             })
             .join('?');
-          window.history.replaceState(null, '', l.pathname + decoded + l.hash);
+          decoded = decoded.replace(/^\/+/, '').replace(/\/{2,}/g, '/');
+          var base = l.pathname.replace(/\/+$/, '/');
+          window.history.replaceState(null, '', base + decoded + l.hash);
         }
       })(window.location);
     </script>
