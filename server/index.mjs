@@ -1,5 +1,6 @@
 import 'dotenv/config';
 import Fastify from 'fastify';
+import cors from '@fastify/cors';
 import { readFile } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -9,6 +10,14 @@ const fastify = Fastify({ logger: true });
 const PORT = Number(process.env.PORT || 3000);
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+
+fastify.register(cors, {
+  origin: [
+    'https://brian00uni.github.io',
+    'http://localhost:5173',
+    'http://127.0.0.1:5173',
+  ],
+});
 
 fastify.get('/api/health', async () => {
   return { ok: true };
