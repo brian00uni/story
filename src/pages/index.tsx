@@ -64,6 +64,17 @@ export default function Main() {
     };
   }, [setHeaderProps]);
 
+  useEffect(() => {
+    fetch('/api/health')
+      .then((res) => res.json())
+      .then((json) => {
+        console.info('API health:', json);
+      })
+      .catch((err) => {
+        console.error('API health error:', err);
+      });
+  }, []);
+
   const [value, setValue] = React.useState(0);
 
   const handleChange = (_event: React.SyntheticEvent, newValue: number) => {

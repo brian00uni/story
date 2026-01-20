@@ -72,9 +72,9 @@ export default function Header({ headerProps }: HeaderLayoutProps) {
   const secondaryNavItems = [
     { text: 'Alarm', to: '/alarm' },
     { text: 'Settings', to: '/settings' },
-    { text: 'DataPortfolio', to: '/data-portfolio' },
     { text: 'Portfolio', to: '/history/portfolio' },
   ];
+  const tertiaryNavItems = [{ text: 'DataPortfolio', to: '/data-portfolio' }];
 
   const DrawerList = (
     <Box sx={{ width: 250 }} role="presentation" onClick={toggleDrawer(false)}>
@@ -94,6 +94,17 @@ export default function Header({ headerProps }: HeaderLayoutProps) {
           <ListItem key={item.to} disablePadding>
             <ListItemButton component={Link} to={item.to}>
               <ListItemIcon>{index % 2 === 0 ? <Notifications /> : <Settings />}</ListItemIcon>
+              <ListItemText primary={item.text} />
+            </ListItemButton>
+          </ListItem>
+        ))}
+      </List>
+      <Divider />
+      <List>
+        {tertiaryNavItems.map((item, index) => (
+          <ListItem key={item.to} disablePadding>
+            <ListItemButton component={Link} to={item.to}>
+              <ListItemIcon>{index % 2 === 0 ? <Inbox /> : <Mail />}</ListItemIcon>
               <ListItemText primary={item.text} />
             </ListItemButton>
           </ListItem>

@@ -6,6 +6,11 @@ import { defineConfig } from 'vite';
 export default defineConfig({
   base: '/story/',
   plugins: [react()],
+  server: {
+    proxy: {
+      '/api': 'http://localhost:3000',
+    },
+  },
   resolve: {
     alias: {
       '@': path.resolve(__dirname, 'src'),
