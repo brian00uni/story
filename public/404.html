@@ -7,6 +7,12 @@
     <script>
       var segmentCount = 1;
       var l = window.location;
+      var path = l.pathname
+        .split('/')
+        .slice(1 + segmentCount)
+        .join('/')
+        .replace(/^\/+/, '')
+        .replace(/\/{2,}/g, '/');
       l.replace(
         l.protocol +
           '//' +
@@ -17,11 +23,7 @@
             .slice(0, 1 + segmentCount)
             .join('/') +
           '/?/' +
-          l.pathname
-            .split('/')
-            .slice(1 + segmentCount)
-            .join('/')
-            .replace(/&/g, '~and~') +
+          path.replace(/&/g, '~and~') +
           (l.search ? '&' + l.search.slice(1).replace(/&/g, '~and~') : '') +
           l.hash
       );
