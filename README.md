@@ -2,6 +2,12 @@
 
 React + TypeScript + Vite with Material UI and SCSS.
 
+## URLs
+
+- Homepage: https://brian00uni.github.io/story
+- Render API: https://story-m7ow.onrender.com
+- Local API: http://localhost:3000
+
 ## Requirements
 
 - Node.js
