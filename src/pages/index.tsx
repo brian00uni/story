@@ -17,6 +17,7 @@ import {
   type SnackbarCloseReason,
 } from '@mui/material';
 import React, { useEffect } from 'react';
+import { apiUrl } from '@/utils/http';
 
 // ========= Dashboard ========= //
 interface TabPanelProps {
@@ -65,7 +66,7 @@ export default function Main() {
   }, [setHeaderProps]);
 
   useEffect(() => {
-    fetch('/api/health')
+    fetch(apiUrl('/api/health'))
       .then((res) => res.json())
       .then((json) => {
         console.info('API health:', json);

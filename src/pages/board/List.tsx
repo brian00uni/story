@@ -1,5 +1,5 @@
 import { useSetHeaderProps } from '@/models/headerContext';
-import { readJson } from '@/utils/http';
+import { apiUrl, readJson } from '@/utils/http';
 import { Box, Button, List, ListItem, ListItemText, Stack, Typography } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
@@ -27,7 +27,7 @@ export default function BoardList() {
   }, [setHeaderProps]);
 
   useEffect(() => {
-    fetch('/api/board')
+    fetch(apiUrl('/api/board'))
       .then(async (res) => {
         if (!res.ok) {
           throw new Error(`Request failed (${res.status})`);

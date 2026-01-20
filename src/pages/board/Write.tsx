@@ -1,5 +1,5 @@
 import { useSetHeaderProps } from '@/models/headerContext';
-import { readJson } from '@/utils/http';
+import { apiUrl, readJson } from '@/utils/http';
 import { Box, Button, Stack, TextField } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -24,7 +24,7 @@ export default function BoardWrite() {
   useEffect(() => {
     if (!id) return;
     setLoading(true);
-    fetch(`/api/board/${id}`)
+    fetch(apiUrl(`/api/board/${id}`))
       .then(async (res) => {
         if (!res.ok) throw new Error('Not found');
         return await readJson<{ title?: string; content?: string }>(res);
@@ -43,7 +43,7 @@ export default function BoardWrite() {
     if (!title.trim() || !content.trim()) return;
     setLoading(true);
     const payload = { title, content };
-    const res = await fetch(id ? `/api/board/${id}` : '/api/board', {
+    const res = await fetch(apiUrl(id ? `/api/board/${id}` : '/api/board'), {
       method: id ? 'PUT' : 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload),
