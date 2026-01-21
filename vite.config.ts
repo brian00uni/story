@@ -7,6 +7,18 @@ export default defineConfig({
   base: '/story/',
   plugins: [react()],
   server: {
+    middlewareMode: false,
+    configureServer(server) {
+      server.middlewares.use((req, res, next) => {
+        if (req.url === '/story') {
+          res.statusCode = 302;
+          res.setHeader('Location', '/story/');
+          res.end();
+          return;
+        }
+        next();
+      });
+    },
     proxy: {
       '/api': 'http://localhost:3000',
     },
