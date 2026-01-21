@@ -5,20 +5,24 @@ import { defineConfig } from 'vite';
 // https://vite.dev/config/
 export default defineConfig({
   base: '/story/',
-  plugins: [react()],
-  server: {
-    middlewareMode: false,
-    configureServer(server) {
-      server.middlewares.use((req, res, next) => {
-        if (req.url === '/story') {
-          res.statusCode = 302;
-          res.setHeader('Location', '/story/');
-          res.end();
-          return;
-        }
-        next();
-      });
+  plugins: [
+    react(),
+    {
+      name: 'redirect-story-slash',
+      configureServer(server) {
+        server.middlewares.use((req, res, next) => {
+          if (req.url === '/story') {
+            res.statusCode = 302;
+            res.setHeader('Location', '/story/');
+            res.end();
+            return;
+          }
+          next();
+        });
+      },
     },
+  ],
+  server: {
     proxy: {
       '/api': 'http://localhost:3000',
     },
