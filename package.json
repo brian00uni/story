@@ -21,10 +21,10 @@
   "dependencies": {
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.1",
-    "@fastify/cors": "^11.2.0",
     "@mui/icons-material": "^7.3.7",
     "@mui/lab": "^7.0.1-beta.21",
     "@mui/material": "^7.3.7",
+    "@fastify/cors": "^11.2.0",
     "dotenv": "^17.2.1",
     "fastify": "^5.7.1",
     "gh-pages": "^6.3.0",
