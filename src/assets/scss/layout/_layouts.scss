@@ -62,7 +62,10 @@ body {
   flex: 1;
 }
 .index-page {
-  background: linear-gradient(180deg, rgba(250, 250, 250, 0) 50%, #eee 100%);
+  body {
+    background-color: $primary;
+    // background: linear-gradient(180deg, rgba(250, 250, 250, 0) 50%, #000 100%);
+  }
 }
 .wrapper {
   .header {

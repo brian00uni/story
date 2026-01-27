@@ -20,7 +20,7 @@ const theme = createTheme({
   },
   typography: {
     fontSize: 14,
-    fontFamily: '"NanumSquare","Roboto", "Noto Sans KR", sans-serif',
+    fontFamily: "'SUIT', sans-serif",
     allVariants: {
       fontSize: '1.4rem',
     },
