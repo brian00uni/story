@@ -5,6 +5,9 @@ import { defineConfig } from 'vite';
 // https://vite.dev/config/
 export default defineConfig({
   base: '/story/',
+  define: {
+    global: 'globalThis',
+  },
   plugins: [
     react(),
     {

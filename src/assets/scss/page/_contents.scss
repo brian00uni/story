@@ -5,6 +5,27 @@
 // #########################    contents Area
 // ################################################################################
 
+.mainPage {
+  @include flex-column;
+  width: 100%;
+  height: 100dvh;
+  &.page-01 {
+    background: linear-gradient(180deg, #334740 50%, #34576b 100%);
+  }
+  &.page-02 {
+    background: linear-gradient(180deg, #34576b 50%, #334740 100%);
+  }
+  &.page-03 {
+    background: linear-gradient(180deg, #334740 50%, #34576b 100%);
+  }
+  &.page-04 {
+    background: linear-gradient(180deg, #34576b 50%, #334740 100%);
+  }
+  &.page-05 {
+    background: linear-gradient(180deg, #334740 50%, #34576b 100%);
+  }
+}
+
 .alarm-box {
   position: relative;
   padding: 2rem 4rem 2rem 2rem;

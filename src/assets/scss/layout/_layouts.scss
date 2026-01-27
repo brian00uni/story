@@ -63,8 +63,18 @@ body {
 }
 .index-page {
   body {
-    background-color: $primary;
+    // background-color: $primary;
     // background: linear-gradient(180deg, rgba(250, 250, 250, 0) 50%, #000 100%);
+    overflow: hidden;
+    .header {
+      display: none !important;
+    }
+  }
+
+  .container {
+    padding: 0 !important;
+    max-width: none !important;
+    height: calc(100vh);
   }
 }
 .wrapper {

@@ -1,36 +1,12 @@
 // material
+import Page01 from '@/pages/history/page-01';
+import Page02 from '@/pages/history/page-02';
+import Page03 from '@/pages/history/page-03';
+import Page04 from '@/pages/history/page-04';
+import Page05 from '@/pages/history/page-05';
 import { useSetHeaderProps } from '@/models/headerContext';
-import { apiUrl } from '@/utils/http';
-import { Box, type SnackbarCloseReason } from '@mui/material';
-import React, { useEffect } from 'react';
-
-// ========= Dashboard ========= //
-interface TabPanelProps {
-  children?: React.ReactNode;
-  index: number;
-  value: number;
-}
-function CustomTabPanel(props: TabPanelProps) {
-  const { children, value, index, ...other } = props;
-
-  return (
-    <div
-      role="tabpanel"
-      hidden={value !== index}
-      id={`tabpanel-${index}`}
-      aria-labelledby={`tab-${index}`}
-      {...other}
-    >
-      {value === index && <Box sx={{ p: 3 }}>{children}</Box>}
-    </div>
-  );
-}
-function a11yProps(index: number) {
-  return {
-    id: `tab-${index}`,
-    'aria-controls': `tabpanel-${index}`,
-  };
-}
+import PageScroller from 'react-page-scroller';
+import { useEffect } from 'react';
 
 export default function Main() {
   const setHeaderProps = useSetHeaderProps();
@@ -50,40 +26,20 @@ export default function Main() {
     };
   }, [setHeaderProps]);
 
-  useEffect(() => {
-    fetch(apiUrl('/api/health'))
-      .then((res) => res.json())
-      .then((json) => {
-        console.info('API health:', json);
-      })
-      .catch((err) => {
-        console.error('API health error:', err);
-      });
-  }, []);
-
-  const [value, setValue] = React.useState(0);
-
-  const handleChange = (_event: React.SyntheticEvent, newValue: number) => {
-    setValue(newValue);
-  };
-
-  const [open, setOpen] = React.useState(false);
-
-  const handleClick = () => {
-    setOpen(true);
-  };
-
-  const handleClose = (_event?: React.SyntheticEvent | Event, reason?: SnackbarCloseReason) => {
-    if (reason === 'clickaway') {
-      return;
-    }
-
-    setOpen(false);
-  };
-
   return (
-    <Box sx={{ width: '100%' }}>
-      <Box sx={{ p: 2 }}>dddd asdfaasdfasdf</Box>
-    </Box>
+    <PageScroller
+      animationTimer={800}
+      animationTimerBuffer={200}
+      transitionTimingFunction="cubic-bezier(0.22, 0.61, 0.36, 1)"
+      containerHeight="100%"
+      containerWidth="100%"
+      renderAllPagesOnFirstRender
+    >
+      <Page01 />
+      <Page02 />
+      <Page03 />
+      <Page04 />
+      <Page05 />
+    </PageScroller>
   );
 }
