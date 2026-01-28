@@ -9,6 +9,7 @@
   @include flex-column;
   width: 100%;
   height: 100dvh;
+  padding: 7rem 5rem;
   &.page-01 {
     background: linear-gradient(180deg, #334740 50%, #34576b 100%);
   }
@@ -26,6 +27,102 @@
   }
 }
 
+.page-scroller-wrap {
+  position: relative;
+  height: 100%;
+  .page-pager {
+    position: fixed;
+    right: 2rem;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    z-index: 50;
+
+    button {
+      width: 12px;
+      height: 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.7);
+      background: transparent;
+      cursor: pointer;
+      transition:
+        transform 180ms ease,
+        background-color 180ms ease,
+        border-color 180ms ease;
+
+      &.active {
+        background: #ffffff;
+        border-color: #ffffff;
+        transform: scale(1.1);
+      }
+    }
+  }
+
+  .page-pager-label {
+    margin-top: 0.5rem;
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.7);
+    text-align: center;
+    letter-spacing: 0.08em;
+  }
+}
+
+.page-01 {
+  .walkman-wrap {
+    position: relative;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .walkman {
+    transform-origin: 50% 90%;
+    animation: walk-bob 0.9s ease-in-out infinite;
+  }
+
+  .walkman-wrap::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: -8px;
+    width: 60%;
+    height: 10px;
+    background: rgba(0, 0, 0, 0.35);
+    filter: blur(6px);
+    transform: translateX(-50%);
+    animation: walk-shadow 0.9s ease-in-out infinite;
+  }
+}
+
+@keyframes walk-bob {
+  0% {
+    transform: translateY(0) rotate(-3deg);
+  }
+  50% {
+    transform: translateY(4px) rotate(3deg);
+  }
+  100% {
+    transform: translateY(0) rotate(-3deg);
+  }
+}
+
+@keyframes walk-shadow {
+  0% {
+    opacity: 0.5;
+    transform: translateX(-50%) scaleX(0.9);
+  }
+  50% {
+    opacity: 0.7;
+    transform: translateX(-50%) scaleX(1.05);
+  }
+  100% {
+    opacity: 0.5;
+    transform: translateX(-50%) scaleX(0.9);
+  }
+}
+
 .alarm-box {
   position: relative;
   padding: 2rem 4rem 2rem 2rem;
@@ -37,5 +134,117 @@
     svg {
       font-size: 2rem;
     }
+  }
+}
+
+// #################################################
+/* ===== 기본 ===== */
+.ico-walk path {
+  fill: #000;
+}
+.ico-walk {
+  animation: walkBob 0.9s ease-in-out infinite;
+}
+
+/* transform 기준 */
+.ico-walk * {
+  transform-box: fill-box;
+}
+
+/* ===== 머리 & 몸통 ===== */
+#head {
+  transform-origin: center bottom;
+  animation: headBob 0.9s ease-in-out infinite;
+}
+
+#torso {
+  transform-origin: center top;
+  animation: torsoSway 0.9s ease-in-out infinite;
+}
+
+/* ===== 팔 ===== */
+#armL {
+  transform-origin: 12px 15px; /* 어깨 */
+  animation: armSwing 0.9s ease-in-out infinite;
+}
+
+#armR {
+  transform-origin: 22px 15px;
+  animation: armSwing 0.9s ease-in-out infinite reverse;
+}
+
+/* ===== 다리 ===== */
+#legL {
+  transform-origin: 12px 45px; /* 골반 */
+  animation: legSwing 0.9s ease-in-out infinite reverse;
+}
+
+#legR {
+  transform-origin: 22px 45px;
+  animation: legSwing 0.9s ease-in-out infinite;
+}
+
+/* ===== keyframes ===== */
+
+/* 팔은 크게 */
+@keyframes armSwing {
+  0%,
+  100% {
+    transform: rotate(22deg);
+  }
+  50% {
+    transform: rotate(-22deg);
+  }
+}
+
+/* 다리는 살짝 앞으로 */
+@keyframes legSwing {
+  0%,
+  100% {
+    transform: rotate(-14deg) translateY(0);
+  }
+  50% {
+    transform: rotate(14deg) translateY(1px);
+  }
+}
+
+/* 몸통 좌우 흔들림 */
+@keyframes torsoSway {
+  0%,
+  100% {
+    transform: rotate(1.5deg);
+  }
+  50% {
+    transform: rotate(-1.5deg);
+  }
+}
+
+/* 머리 보정 */
+@keyframes headBob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(0.6px);
+  }
+}
+
+/* 전체 바운스 */
+@keyframes walkBob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(1.5px);
+  }
+}
+
+/* 접근성 */
+@media (prefers-reduced-motion: reduce) {
+  .ico-walk,
+  .ico-walk * {
+    animation: none !important;
   }
 }
