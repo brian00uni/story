@@ -60,6 +60,7 @@ declare module '@mui/material/ButtonGroup' {
 declare module '@mui/material/Chip' {
   interface ChipPropsVariantOverrides {
     isFocus: true;
+    isIcon: true;
   }
 }
 
@@ -71,7 +72,7 @@ declare module '@mui/material/CircularProgress' {
 
 declare module '@mui/material/Divider' {
   interface DividerPropsVariantOverrides {
-    // No custom variants found in C:/Users/gccare14/Desktop/test_Work/story/story/src/theme/theme.ts
+    cateLine: true;
   }
 }
 
@@ -83,7 +84,7 @@ declare module '@mui/material/Fab' {
 
 declare module '@mui/material/FormHelperText' {
   interface FormHelperTextPropsVariantOverrides {
-    // No custom variants found in C:/Users/gccare14/Desktop/test_Work/story/story/src/theme/theme.ts
+    cateLine: true;
   }
 }
 
@@ -101,19 +102,19 @@ declare module '@mui/material/LinearProgress' {
 
 declare module '@mui/material/Pagination' {
   interface PaginationPropsVariantOverrides {
-    // No custom variants found in C:/Users/gccare14/Desktop/test_Work/story/story/src/theme/theme.ts
+    cateLine: true;
   }
 }
 
 declare module '@mui/material/PaginationItem' {
   interface PaginationItemPropsVariantOverrides {
-    // No custom variants found in C:/Users/gccare14/Desktop/test_Work/story/story/src/theme/theme.ts
+    cateLine: true;
   }
 }
 
 declare module '@mui/material/Paper' {
   interface PaperPropsVariantOverrides {
-    // No custom variants found in C:/Users/gccare14/Desktop/test_Work/story/story/src/theme/theme.ts
+    cateLine: true;
   }
 }
 
@@ -137,6 +138,6 @@ declare module '@mui/material/Toolbar' {
 
 declare module '@mui/material/Typography' {
   interface TypographyPropsVariantOverrides {
-    isFocus: true;
+    category: true;
   }
 }

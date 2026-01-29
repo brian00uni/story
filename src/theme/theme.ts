@@ -1,6 +1,16 @@
 import { createTheme } from '@mui/material/styles';
 
-const theme = createTheme({
+// base Theme
+const baseTheme = createTheme({
+  breakpoints: {
+    values: {
+      xs: 0,
+      sm: 600,
+      md: 900,
+      lg: 1200,
+      xl: 1536,
+    },
+  },
   palette: {
     mode: 'light',
     primary: {
@@ -52,6 +62,10 @@ const theme = createTheme({
       textTransform: 'none',
     },
   },
+});
+
+// custom Theme
+const theme = createTheme(baseTheme, {
   components: {
     MuiCssBaseline: {
       styleOverrides: {
@@ -59,6 +73,7 @@ const theme = createTheme({
           fontSize: '10px',
         },
         body: {
+          // maxWidth: '120rem',
           fontSize: '1.4rem',
           margin: 0,
           color: '#111111',
@@ -83,6 +98,19 @@ const theme = createTheme({
             fontWeight: 'bold',
           },
         },
+        {
+          props: { variant: 'isIcon' },
+          style: {
+            color: '#ffffff',
+            borderRadius: '8px',
+            padding: '0.4rem 0.8rem',
+            backgroundColor: 'inherit',
+            '.MuiChip-icon': {
+              color: '#ffffff',
+              fontSize: '2.4rem',
+            },
+          },
+        },
       ],
     },
     MuiTypography: {
@@ -92,6 +120,18 @@ const theme = createTheme({
         },
       },
       variants: [
+        {
+          props: { variant: 'category' },
+          style: {
+            color: '#ffffff50',
+            fontSize: '4.8rem',
+            fontWeight: '900',
+            lineHeight: 1,
+            [baseTheme.breakpoints.down('sm')]: {
+              // backgroundColor: 'red',
+            },
+          },
+        },
         {
           props: { variant: 'isFocus' },
           style: {
@@ -202,6 +242,21 @@ const theme = createTheme({
       },
     },
     MuiPaginationItem: {
+      styleOverrides: {
+        root: {
+          fontSize: '1.4rem',
+        },
+      },
+    },
+    MuiDivider: {
+      variants: [
+        {
+          props: { variant: 'cateLine' },
+          style: {
+            borderColor: 'rgba(255, 255, 255, 0.1)',
+          },
+        },
+      ],
       styleOverrides: {
         root: {
           fontSize: '1.4rem',

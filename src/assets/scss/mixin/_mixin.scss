@@ -3,6 +3,25 @@ $min-width: 36rem;
 $max-width: 102.4rem;
 $font-size10: 1rem;
 
+// responsive breakpoints
+$breakpoints: (
+  xs: 0,
+  sm: 600px,
+  md: 900px,
+  lg: 1200px,
+  xl: 1536px,
+);
+
+@mixin bp($size) {
+  $value: map-get($breakpoints, $size);
+  @if $value == null {
+    @error "Unknown breakpoint `#{$size}`. Use one of: xs, sm, md, lg, xl.";
+  }
+  @media (max-width: $value) {
+    @content;
+  }
+}
+
 @mixin icons($width, $height, $url) {
   display: inline-block;
   width: $width !important;

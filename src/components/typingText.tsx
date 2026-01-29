@@ -8,7 +8,7 @@ export default function TypingText() {
         1000, // Waits 1s
         'Hello World!', // Deletes 'One' and types 'Two'
         2000, // Waits 2s
-        '안녕하세요\n  김형윤입니다', // Types 'Three' without deleting 'Two'
+        '안녕하세요\n  김형윤입니다 INTUITIVE UI / USER ENGAGEMENt / PERFORMANCE / IMPROVEMENT', // Types 'Three' without deleting 'Two'
         () => {
           console.log('>>>>>>>>>>>> Typing completed');
         },
