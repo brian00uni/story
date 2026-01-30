@@ -36,7 +36,7 @@ export default function Main() {
   //   }
   // };
 
-  const pages = ['01', '02', '03', '04', '05'];
+  // const pages = ['01', '02', '03', '04', '05'];
 
   return (
     <div className="page-scroller-wrap">
