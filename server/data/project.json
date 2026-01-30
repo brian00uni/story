@@ -24,5 +24,18 @@
     "Performed": "수행내용",
     "Achievements": "성과",
     "imgSrc": "@/assets/images/svg/ico-man.svg"
+  },
+  {
+    "No": 2,
+    "Title": "2222  프로",
+    "Description": "  222프로",
+    "Client": "고2사",
+    "Duration": "기간",
+    "Team": "팀원",
+    "Role": "역할",
+    "Technology": "기술스택",
+    "Performed": "수행내용",
+    "Achievements": "성과",
+    "imgSrc": "@/assets/images/svg/ico-man.svg"
   }
 ]

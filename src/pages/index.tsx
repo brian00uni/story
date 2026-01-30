@@ -7,7 +7,7 @@ import Page04 from '@/pages/history/page-04';
 import Page05 from '@/pages/history/page-05';
 import { useEffect } from 'react';
 import 'swiper/css';
-import { Mousewheel } from 'swiper/modules';
+import { A11y, Mousewheel, Navigation, Pagination, Scrollbar } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 export default function Main() {
@@ -35,8 +35,13 @@ export default function Main() {
       slidesPerView={1}
       speed={800}
       mousewheel
-      modules={[Mousewheel]}
-      // style={{ height: '100vh' }}
+      modules={[Navigation, Pagination, Scrollbar, A11y, Mousewheel]}
+      navigation
+      pagination={{ clickable: true }}
+      scrollbar={{ draggable: true }}
+      onSwiper={(swiper) => console.log(swiper)}
+      onSlideChange={() => console.log('slide change')}
+      style={{ height: '100vh' }}
     >
       <SwiperSlide>
         <Page01 />

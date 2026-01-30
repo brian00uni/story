@@ -34,6 +34,12 @@ fastify.get('/api/portfolio', async () => {
   return JSON.parse(raw);
 });
 
+fastify.get('/api/projects', async () => {
+  const dataPath = path.join(__dirname, 'data', 'project.json');
+  const raw = await readFile(dataPath, 'utf-8');
+  return JSON.parse(raw);
+});
+
 fastify.get('/api/board', async () => {
   if (useMemoryDb || !pool) {
     return memoryBoardItems
