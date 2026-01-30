@@ -1,3 +1,5 @@
+(globalThis as any)._babelPolyfill = true;
+
 import App from '@/App';
 import '@/assets/scss/style.scss';
 import theme from '@/theme/theme';
