@@ -1,3 +1,5 @@
+@use 'sass:map';
+
 //font-size;
 $min-width: 36rem;
 $max-width: 102.4rem;
@@ -13,7 +15,7 @@ $breakpoints: (
 );
 
 @mixin bp($size) {
-  $value: map-get($breakpoints, $size);
+  $value: map.get($breakpoints, $size);
   @if $value == null {
     @error "Unknown breakpoint `#{$size}`. Use one of: xs, sm, md, lg, xl.";
   }
