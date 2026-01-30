@@ -138,7 +138,11 @@ fastify.put('/api/board/:id', async (request, reply) => {
 });
 
 fastify.addHook('onReady', async () => {
-  await ensureBoardTable();
+  try {
+    await ensureBoardTable({ timeoutMs: 5000 });
+  } catch (err) {
+    fastify.log.error({ err }, 'DB init timed out; continuing without DB');
+  }
 });
 
 const memoryBoardItems = [];

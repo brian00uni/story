@@ -4,18 +4,18 @@ import { BiLogoCss3, BiLogoHtml5, BiLogoJavascript } from 'react-icons/bi';
 import { FaBootstrap, FaGitAlt, FaLaptopCode, FaReact, FaSass } from 'react-icons/fa';
 import { MdDesignServices, MdDevices, MdLanguage, MdVerified } from 'react-icons/md';
 import {
+  SiAdobephotoshop,
+  SiAdobexd,
   SiAntdesign,
   SiBuefy,
   SiChakraui,
-  SiMaterialdesign,
-  SiTailwindcss,
-  SiAdobephotoshop,
-  SiAdobexd,
   SiFigma,
   SiGithub,
   SiJquery,
-  SiSlack,
+  SiMaterialdesign,
   SiNotion,
+  SiSlack,
+  SiTailwindcss,
   SiTypescript,
 } from 'react-icons/si';
 
@@ -78,7 +78,7 @@ export default function Page03() {
                     const color = chipColors[index % chipColors.length];
                     return (
                       <Chip
-                        key={chip.label}
+                        key={`${chip.label}-${index}`}
                         icon={chip.icon}
                         label={chip.label}
                         variant="isIcon"
@@ -103,7 +103,7 @@ export default function Page03() {
                     const color = chipColors[index % chipColors.length];
                     return (
                       <Chip
-                        key={chipTool.label}
+                        key={`${chipTool.label}-${index}`}
                         icon={chipTool.icon}
                         label={chipTool.label}
                         variant="isIcon"

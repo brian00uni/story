@@ -5,8 +5,10 @@ import Page02 from '@/pages/history/page-02';
 import Page03 from '@/pages/history/page-03';
 import Page04 from '@/pages/history/page-04';
 import Page05 from '@/pages/history/page-05';
-// import PageScroller from 'react-page-scroller';
 import { useEffect } from 'react';
+import 'swiper/css';
+import { Mousewheel } from 'swiper/modules';
+import { Swiper, SwiperSlide } from 'swiper/react';
 
 export default function Main() {
   const setHeaderProps = useSetHeaderProps();
@@ -26,51 +28,31 @@ export default function Main() {
     };
   }, [setHeaderProps]);
 
-  // const [currentPage, setCurrentPage] = useState(0);
-  // const [pageRequest, setPageRequest] = useState(0);
-
-  // const handlePageChange = (pageNumber: number) => {
-  //   setCurrentPage(pageNumber);
-  //   if (pageNumber !== pageRequest) {
-  //     setPageRequest(pageNumber);
-  //   }
-  // };
-
-  // const pages = ['01', '02', '03', '04', '05'];
-
   return (
-    <div className="page-scroller-wrap">
-      {/* <PageScroller
-        animationTimer={800}
-        animationTimerBuffer={200}
-        transitionTimingFunction="cubic-bezier(0.22, 0.61, 0.36, 1)"
-        containerHeight="100%"
-        containerWidth="100%"
-        renderAllPagesOnFirstRender
-        pageOnChange={handlePageChange}
-        customPageNumber={pageRequest}
-      > */}
-      <Page01 />
-      <Page02 />
-      <Page03 />
-      <Page04 />
-      <Page05 />
-      {/* </PageScroller> */}
-      {/* <div className="page-pager" role="navigation" aria-label="Full page sections">
-        {pages.map((label, index) => (
-          <button
-            key={label}
-            type="button"
-            className={index === currentPage ? 'active' : undefined}
-            onClick={() => setPageRequest(index)}
-            aria-current={index === currentPage ? 'page' : undefined}
-            aria-label={`Go to page ${label}`}
-          />
-        ))}
-        <div className="page-pager-label">
-          {String(currentPage + 1).padStart(2, '0')} / {pages.length}
-        </div> */}
-      {/* </div> */}
-    </div>
+    <Swiper
+      // className="page-scroller-wrap"
+      direction="vertical"
+      slidesPerView={1}
+      speed={800}
+      mousewheel
+      modules={[Mousewheel]}
+      // style={{ height: '100vh' }}
+    >
+      <SwiperSlide>
+        <Page01 />
+      </SwiperSlide>
+      <SwiperSlide>
+        <Page02 />
+      </SwiperSlide>
+      <SwiperSlide>
+        <Page03 />
+      </SwiperSlide>
+      <SwiperSlide>
+        <Page04 />
+      </SwiperSlide>
+      <SwiperSlide>
+        <Page05 />
+      </SwiperSlide>
+    </Swiper>
   );
 }
