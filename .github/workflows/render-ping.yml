@@ -11,4 +11,4 @@ jobs:
     steps:
       - name: Ping Render
         run: |
-          curl -fsS https://story-m7ow.onrender.com/api/health > /dev/null
+          curl -fsS https://story-m7ow.onrender.com/api/health
