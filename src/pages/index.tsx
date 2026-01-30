@@ -6,7 +6,7 @@ import Page03 from '@/pages/history/page-03';
 import Page04 from '@/pages/history/page-04';
 import Page05 from '@/pages/history/page-05';
 // import PageScroller from 'react-page-scroller';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 
 export default function Main() {
   const setHeaderProps = useSetHeaderProps();
@@ -26,15 +26,15 @@ export default function Main() {
     };
   }, [setHeaderProps]);
 
-  const [currentPage, setCurrentPage] = useState(0);
-  const [pageRequest, setPageRequest] = useState(0);
+  // const [currentPage, setCurrentPage] = useState(0);
+  // const [pageRequest, setPageRequest] = useState(0);
 
-  const handlePageChange = (pageNumber: number) => {
-    setCurrentPage(pageNumber);
-    if (pageNumber !== pageRequest) {
-      setPageRequest(pageNumber);
-    }
-  };
+  // const handlePageChange = (pageNumber: number) => {
+  //   setCurrentPage(pageNumber);
+  //   if (pageNumber !== pageRequest) {
+  //     setPageRequest(pageNumber);
+  //   }
+  // };
 
   const pages = ['01', '02', '03', '04', '05'];
 
@@ -56,7 +56,7 @@ export default function Main() {
       <Page04 />
       <Page05 />
       {/* </PageScroller> */}
-      <div className="page-pager" role="navigation" aria-label="Full page sections">
+      {/* <div className="page-pager" role="navigation" aria-label="Full page sections">
         {pages.map((label, index) => (
           <button
             key={label}
@@ -69,8 +69,8 @@ export default function Main() {
         ))}
         <div className="page-pager-label">
           {String(currentPage + 1).padStart(2, '0')} / {pages.length}
-        </div>
-      </div>
+        </div> */}
+      {/* </div> */}
     </div>
   );
 }
