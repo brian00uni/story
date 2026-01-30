@@ -14,6 +14,7 @@ import {
   SiFigma,
   SiGithub,
   SiJquery,
+  SiSlack,
   SiNotion,
   SiTypescript,
 } from 'react-icons/si';
@@ -48,6 +49,7 @@ export default function Page03() {
     { icon: <MdDesignServices />, label: 'Zeplin' },
     { icon: <SiAdobexd />, label: 'Adobe XD' },
     { icon: <FaGitAlt />, label: 'Git' },
+    { icon: <SiSlack />, label: 'Slack' },
     { icon: <SiNotion />, label: 'Notion' },
     { icon: <SiGithub />, label: 'GitHub' },
   ];

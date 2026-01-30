@@ -1,0 +1,38 @@
+[
+  {
+    "No": 0,
+    "Company": "회사명",
+    "Role": "역할",
+    "Position": "직급",
+    "Job": "직무",
+    "Duration": "기간",
+    "Total": "총 근무기간",
+    "Location": "지역",
+    "Leaving": "퇴사사유",
+    "Description": "설명"
+  },
+  {
+    "No": 1,
+    "Company": "제이넷시스템",
+    "Position": "과장",
+    "Role": "퍼블리셔",
+    "Job": "홈페이지 개발, 관리, 웹접근성",
+    "Duration": "2009.08 ~ 2012.07",
+    "Total": "3년",
+    "Location": "서울",
+    "Leaving": "개인사정",
+    "Description": ""
+  },
+  {
+    "No": 1,
+    "Company": "제이넷시스템",
+    "Position": "과장",
+    "Role": "퍼블리셔",
+    "Job": "홈페이지 개발, 관리, 웹접근성",
+    "Duration": "2009.08 ~ 2012.07",
+    "Total": "3년",
+    "Location": "서울",
+    "Leaving": "개인사정",
+    "Description": ""
+  }
+]

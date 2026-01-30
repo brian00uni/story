@@ -1,4 +1,3 @@
-import lgPhotoshop from '@/assets/images/logo/lg-photoshop.webp';
 import icoMan from '@/assets/images/svg/ico-man.svg';
 import TypingText from '@/components/typingText';
 import { Box, Stack, Typography } from '@mui/material';
@@ -13,7 +12,7 @@ export default function Page01() {
           Page 01
         </Typography>
 
-        <img src={lgPhotoshop} alt="Photoshop logo" />
+        {/* <img src={lgPhotoshop} alt="Photoshop logo" /> */}
         <TypingText />
         {/* <Box className="walkman-wrap">
           <Box
