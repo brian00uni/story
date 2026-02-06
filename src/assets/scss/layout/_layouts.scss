@@ -65,7 +65,7 @@ body {
   body {
     // background-color: $primary;
     // background: linear-gradient(180deg, rgba(250, 250, 250, 0) 50%, #000 100%);
-    overflow: hidden;
+    overflow: auto;
     .header {
       display: none !important;
     }
@@ -74,7 +74,51 @@ body {
   .container {
     padding: 0 !important;
     max-width: none !important;
-    height: calc(100dvh);
+    height: auto;
+  }
+
+  .swiper-pagination {
+    position: fixed;
+    right: 1.6rem;
+    left: auto;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.8rem;
+    z-index: 10;
+  }
+
+  .swiper-pagination-bullet {
+    margin: 0 !important;
+    width: 0.8rem;
+    height: 0.8rem;
+    border: solid 0.2rem $col-gray2;
+    background: rgba(255, 255, 255, 0.5);
+    &.is-active {
+      background: #f44;
+    }
+  }
+
+  .swiper-slide {
+    height: auto;
+    overflow: visible;
+  }
+
+  .swiper,
+  .swiper-wrapper {
+    height: auto;
+    overflow: visible;
+  }
+
+  .nav-page {
+    position: fixed;
+    top: 50%;
+    right: 2rem;
+    transform: translateY(-50%);
+    z-index: 10;
+    flex-direction: column;
   }
 }
 .wrapper {
