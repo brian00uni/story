@@ -5,6 +5,7 @@ import Page02 from '@/pages/history/page-02';
 import Page03 from '@/pages/history/page-03';
 import Page04 from '@/pages/history/page-04';
 import Page05 from '@/pages/history/page-05';
+import Page06 from '@/pages/history/page-06';
 import { Button, ButtonGroup, Stack } from '@mui/material';
 import { useEffect, useMemo, useRef, useState } from 'react';
 // import 'swiper/css';
@@ -21,6 +22,7 @@ export default function Main() {
       { id: 'page-03', label: 'Three' },
       { id: 'page-04', label: 'Four' },
       { id: 'page-05', label: 'Five' },
+      { id: 'page-06', label: 'Six' },
     ],
     [],
   );
@@ -103,6 +105,14 @@ export default function Main() {
           }}
         >
           <Page05 />
+        </div>
+        <div
+          id="page-06"
+          ref={(el) => {
+            sectionRefs.current[5] = el;
+          }}
+        >
+          <Page06 />
         </div>
       </Stack>
       <ButtonGroup className="nav-page" aria-label="Nav button group">

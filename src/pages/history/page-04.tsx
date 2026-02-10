@@ -3,16 +3,18 @@ import { Box, Divider, Grid, Paper, Typography } from '@mui/material';
 
 type Project = {
   No: number;
-  Title: string;
-  Description: string;
-  Client: string;
-  Duration: string;
-  Team: string;
-  Role: string;
-  Technology: string;
-  Performed: string;
-  Achievements: string;
-  imgSrc: string;
+  data: {
+    Title: string;
+    Description: string;
+    Client: string;
+    Duration: string;
+    Team: string;
+    Role: string;
+    Technology: string;
+    Performed: string;
+    Achievements: string;
+    imgSrc: string | null;
+  };
 };
 
 const projects = Array.isArray(projectsData) ? (projectsData as Project[]) : [];
@@ -46,13 +48,13 @@ export default function Page04() {
               <Grid key={project.No} size={6}>
                 <Paper elevation={3} sx={{ padding: '1rem' }}>
                   <Typography variant="h1" component={'div'}>
-                    {project.Title}
+                    {project.data.Title}
                   </Typography>
-                  {resolveProjectImage(project.imgSrc) ? (
+                  {resolveProjectImage(project.data.imgSrc ?? '') ? (
                     <Box sx={{ mt: 1 }}>
                       <img
-                        src={resolveProjectImage(project.imgSrc) ?? ''}
-                        alt={`${project.Title} image`}
+                        src={resolveProjectImage(project.data.imgSrc ?? '') ?? ''}
+                        alt={`${project.data.Title} image`}
                         style={{ maxWidth: '100%', height: 'auto', display: 'block' }}
                       />
                     </Box>
@@ -62,14 +64,14 @@ export default function Page04() {
                     component={'div'}
                     sx={{ marginTop: '1rem', whiteSpace: 'pre-line' }}
                   >
-                    {project.Description}
-                    {'\n'}- Client: {project.Client}
-                    {'\n'}- Duration: {project.Duration}
-                    {'\n'}- Team: {project.Team}
-                    {'\n'}- Role: {project.Role}
-                    {'\n'}- Technology: {project.Technology}
-                    {'\n'}- Performed: {project.Performed}
-                    {'\n'}- Achievements: {project.Achievements}
+                    {project.data.Description}
+                    {'\n'}- Client: {project.data.Client}
+                    {'\n'}- Duration: {project.data.Duration}
+                    {'\n'}- Team: {project.data.Team}
+                    {'\n'}- Role: {project.data.Role}
+                    {'\n'}- Technology: {project.data.Technology}
+                    {'\n'}- Performed: {project.data.Performed}
+                    {'\n'}- Achievements: {project.data.Achievements}
                   </Typography>
                 </Paper>
               </Grid>
