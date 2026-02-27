@@ -3,15 +3,14 @@ import pg from 'pg';
 const { Pool } = pg;
 
 const connectionString = process.env.DATABASE_URL;
-const useMemoryDb = process.env.USE_MEMORY_DB === '1' || !connectionString;
+const isRenderConnection = connectionString?.includes('render.com');
+const useMemoryDb =
+  process.env.USE_MEMORY_DB === '1' || !connectionString || isRenderConnection;
 
 export const pool = useMemoryDb
   ? null
   : new Pool({
       connectionString,
-      ssl: connectionString?.includes('render.com')
-        ? { rejectUnauthorized: false }
-        : undefined,
     });
 export { useMemoryDb };
 

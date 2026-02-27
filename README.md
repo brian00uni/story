@@ -5,7 +5,6 @@ React + TypeScript + Vite with Material UI and SCSS.
 ## URLs
 
 - Homepage: https://brian00uni.github.io/story
-- Render API: https://story-m7ow.onrender.com
 - Local API: http://localhost:3000
 
 ## Requirements
@@ -21,32 +20,22 @@ yarn
 
 ## Run
 
+Frontend + API server:
+
 ```bash
 yarn dev
 ```
 
-## Material UI
+API server only:
 
-Installed packages:
-
-- `@mui/material`
-- `@emotion/react`
-- `@emotion/styled`
-
-Example usage:
-
-```tsx
-import { Button, Stack, Typography } from '@mui/material';
-
-export default function Example() {
-  return (
-    <Stack spacing={2}>
-      <Typography variant="h5">Hello MUI</Typography>
-      <Button variant="contained">Action</Button>
-    </Stack>
-  );
-}
+```bash
+yarn server
 ```
+
+## API Notes
+
+- `/api/board` is currently in-memory only.
+- Data resets when the server restarts.
 
 ## Formatting
 
@@ -56,9 +45,3 @@ Prettier scripts:
 yarn format
 yarn format:check
 ```
-
-VS Code settings enable format on save and organize imports in `.vscode/settings.json`.
-
-## SCSS
-
-Global styles are loaded from `src/assets/scss/style.scss` in `src/main.tsx`.
