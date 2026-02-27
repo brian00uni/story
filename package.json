@@ -28,13 +28,14 @@
     "dotenv": "^17.2.1",
     "fastify": "^5.7.1",
     "gh-pages": "^6.3.0",
+    "lottie-react": "^2.4.1",
     "pg": "^8.17.1",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "react-icons": "^5.5.0",
-    "swiper": "^11.2.1",
     "react-router-dom": "^7.12.0",
-    "react-type-animation": "^3.2.0"
+    "react-type-animation": "^3.2.0",
+    "swiper": "^11.2.1"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.1",

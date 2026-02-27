@@ -34,7 +34,7 @@ body {
   // background-color: #f6f7fb;
   // color: #111;
   * {
-    // font-size: $body-font-size;
+    font-family: $font-main;
   }
   a {
     color: inherit;
@@ -119,6 +119,8 @@ body {
     transform: translateY(-50%);
     z-index: 10;
     flex-direction: column;
+    background-color: #fff;
+    filter: blur(15px) contrast(150%) sepia(60%);
   }
 }
 .wrapper {
