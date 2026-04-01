@@ -8,6 +8,8 @@ pnpm-debug.log*
 lerna-debug.log*
 
 node_modules
+.yarn-cache
+.yarn-cache-v2
 dist
 dist-ssr
 *.local

@@ -9,6 +9,9 @@ import BoardView from '@/pages/board/View';
 import BoardWrite from '@/pages/board/Write';
 import AlarmPage from '@/pages/sub/alarm';
 import Components from '@/pages/sub/components';
+// **********************************
+import FunLo from '@/pages/lo/lo.tsx';
+// **********************************
 import { Route, Routes } from 'react-router-dom';
 
 // layout ...
@@ -67,6 +70,13 @@ const routes = [
   {
     path: '/board/:id/edit',
     element: <BoardWrite />,
+  },
+  // ################################################################
+  // #######  ex View
+  // ################################################################
+  {
+    path: '/lo',
+    element: <FunLo />,
   },
 ];
 

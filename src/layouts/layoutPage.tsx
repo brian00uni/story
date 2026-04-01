@@ -3,11 +3,18 @@ import { HeaderPropsProvider, type HeaderProps } from '@/models/headerContext';
 import { FileCopy, Print, Save, Share } from '@mui/icons-material';
 import { Box, Container, SpeedDial, SpeedDialAction, SpeedDialIcon } from '@mui/material';
 import { useCallback, useState } from 'react';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useNavigate } from 'react-router-dom';
 
 // ==============================|| LAYOUT - AUTH ||============================== //
 
+type SpeedDialLinkAction = {
+  icon: React.ReactNode;
+  name: string;
+  to: string;
+};
+
 export default function LayoutPage() {
+  const navigate = useNavigate();
   const [headerProps, setHeaderPropsState] = useState<HeaderProps>({
     pageTitle: '',
     backButton: false,
@@ -15,11 +22,11 @@ export default function LayoutPage() {
     fnGoBack: undefined,
   });
 
-  const actions = [
-    { icon: <FileCopy />, name: '복사' },
-    { icon: <Save />, name: '저장' },
-    { icon: <Print />, name: '출력' },
-    { icon: <Share />, name: '공유' },
+  const actions: SpeedDialLinkAction[] = [
+    { icon: <FileCopy />, name: '게시판', to: '/board' },
+    { icon: <Save />, name: '포트폴리오', to: '/history/portfolio' },
+    { icon: <Print />, name: '대시보드', to: '/dashboard' },
+    { icon: <Share />, name: '로또', to: '/lo' },
   ];
 
   const setHeaderProps = useCallback((props: Partial<HeaderProps>) => {
@@ -41,6 +48,7 @@ export default function LayoutPage() {
               <SpeedDialAction
                 key={action.name}
                 icon={action.icon}
+                onClick={() => navigate(action.to)}
                 slotProps={{
                   tooltip: {
                     title: action.name,
