@@ -12,7 +12,7 @@ export default function Page01() {
     <Box className="mainPage page-01">
       <Stack spacing={2} alignItems="center">
         {/* <IcoMove /> */}
-        <Box component="img" src={icoMan} alt="Man icon" sx={{ width: 160, height: 'auto' }} />
+        {/* <Box component="img" src={icoMan} alt="Man icon" sx={{ width: 160, height: 'auto' }} /> */}
         <Typography variant="h3" component="h1">
           Page 01
         </Typography>

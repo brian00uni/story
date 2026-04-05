@@ -123,7 +123,7 @@ const theme = createTheme(baseTheme, {
         {
           props: { variant: 'category' },
           style: {
-            color: '#ffffff50',
+            color: '#ddd',
             fontSize: '4.8rem',
             fontWeight: '900',
             lineHeight: 1,
