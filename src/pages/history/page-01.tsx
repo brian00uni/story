@@ -1,13 +1,13 @@
-import icoMan from '@/assets/images/svg/ico-man.svg';
+// import icoMan from '@/assets/images/svg/ico-man.svg';
 import TypingText from '@/components/typingText';
-import { Box, Stack, Typography } from '@mui/material';
+import { Box, Stack } from '@mui/material';
 
 import animationData from '@/data/intro.json'; // 로컬 JSON 파일
 import Lottie from 'lottie-react';
 import { useState } from 'react';
 
 export default function Page01() {
-  const [isPlaying, setIsPlaying] = useState(true);
+  // const [isPlaying, setIsPlaying] = useState(true);
   return (
     <Box className="mainPage page-01">
       <Stack  alignItems="center">
@@ -21,7 +21,7 @@ export default function Page01() {
           <Lottie
             animationData={animationData}
             loop={true}
-            autoplay={isPlaying}
+            // autoplay={isPlaying}
             // style={{ width: 500, height: 'auto' }}
           />
           {/* <button onClick={() => setIsPlaying(!isPlaying)}>{isPlaying ? '정지' : '재생'}</button> */}
