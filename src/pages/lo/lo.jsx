@@ -150,17 +150,16 @@ const ls = {
 const DH_API_URL = (drw) =>
   `https://www.dhlottery.co.kr/common.do?method=getLottoNumber&drwNo=${drw}`;
 
-const DRAW_ENDPOINTS = (drwNo) => [
-  `/api/lotto?drwNo=${drwNo}`,
-  `https://api.allorigins.win/raw?url=${encodeURIComponent(DH_API_URL(drwNo))}`,
-  `https://corsproxy.io/?${encodeURIComponent(DH_API_URL(drwNo))}`,
+const PROXIES = [
+  (url) => `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`,
+  (url) => `https://corsproxy.io/?${encodeURIComponent(url)}`,
 ];
 
 async function fetchOneDraw(drwNo) {
   let lastErr = null;
-  for (const endpoint of DRAW_ENDPOINTS(drwNo)) {
+  for (const proxy of PROXIES) {
     try {
-      const res = await fetch(endpoint, {
+      const res = await fetch(proxy(DH_API_URL(drwNo)), {
         cache:   'no-store',
         signal:  AbortSignal.timeout(8000), // 8초 타임아웃
       });
