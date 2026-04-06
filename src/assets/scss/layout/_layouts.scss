@@ -173,5 +173,54 @@ body {
   .container {
     padding: 2rem 2rem 3rem;
     background-color: #f2f4f7;
+    .MuiStack-root {
+      > div {
+        position: sticky;
+        transition: all 0.5s ease-in-out;
+
+        &#page-01 {
+          position: fixed;
+
+          inset: 0;
+          z-index: 1;
+          // background-color: $col-gray0;
+          // background: linear-gradient(180deg, #334740 50%, #34576b 100%);
+        }
+        &#page-02 {
+          position: relative;
+          top: 20rem;
+          // top: 2rem;
+          background-color: $col-gray9;
+          z-index: 2;
+          // background: linear-gradient(180deg, #34576b 50%, #334740 100%);
+        }
+        &#page-03 {
+          top: 4rem;
+          background-color: $col-gray8;
+          z-index: 3;
+          // background: linear-gradient(180deg, #334740 50%, #34576b 100%);
+        }
+        &#page-04 {
+          top: 6rem;
+          background-color: $col-gray7;
+          z-index: 4;
+          // background: linear-gradient(180deg, #34576b 50%, #334740 100%);
+        }
+        &#page-05 {
+          top: 8rem;
+          background-color: $col-gray6;
+          z-index: 5;
+
+          // background: linear-gradient(180deg, #334740 50%, #34576b 100%);
+        }
+        &#page-06 {
+          top: 8rem;
+          background-color: $col-gray7;
+          z-index: 6;
+
+          // background: linear-gradient(180deg, #334740 50%, #34576b 100%);
+        }
+      }
+    }
   }
 }

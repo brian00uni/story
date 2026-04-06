@@ -28,11 +28,10 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': 'http://localhost:3000',
-      '/api/lotto': {
+      '/api-lotto': {
         target: 'https://www.dhlottery.co.kr',
         changeOrigin: true,
-        rewrite: (path) =>
-          '/common.do?method=getLottoNumber' + path.split('?')[1]?.replace('drwNo=', '&drwNo='),
+        rewrite: (p) => p.replace('/api-lotto', '/common.do'),
       },
     },
   },

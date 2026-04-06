@@ -1,5 +1,6 @@
 // import icoMan from '@/assets/images/svg/ico-man.svg';
 import TypingText from '@/components/typingText';
+// import ScrollText from '@/components/scrollText';
 import { Box, Stack } from '@mui/material';
 
 import animationData from '@/data/intro.json'; // 로컬 JSON 파일
@@ -29,6 +30,7 @@ export default function Page01() {
 
         {/* <img src={lgPhotoshop} alt="Photoshop logo" /> */}
         <TypingText />
+        {/* <ScrollText /> */}
         {/* <Box className="walkman-wrap">
           <Box
             component="img"
