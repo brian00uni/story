@@ -175,46 +175,46 @@ body {
     background-color: #f2f4f7;
     .MuiStack-root {
       > div {
-        position: sticky;
-        transition: all 0.5s ease-in-out;
+        // position: sticky;
+        // transition: all 0.5s ease-in-out;
 
         &#page-01 {
-          position: fixed;
+          // position: fixed;
 
-          inset: 0;
-          z-index: 1;
+          // inset: 0;
+          // z-index: 1;
           // background-color: $col-gray0;
           // background: linear-gradient(180deg, #334740 50%, #34576b 100%);
         }
         &#page-02 {
-          position: relative;
-          top: 20rem;
+          // position: relative;
+          // top: 20rem;
           // top: 2rem;
           background-color: $col-gray9;
           z-index: 2;
           // background: linear-gradient(180deg, #34576b 50%, #334740 100%);
         }
         &#page-03 {
-          top: 4rem;
+          // top: 4rem;
           background-color: $col-gray8;
           z-index: 3;
           // background: linear-gradient(180deg, #334740 50%, #34576b 100%);
         }
         &#page-04 {
-          top: 6rem;
+          // top: 6rem;
           background-color: $col-gray7;
           z-index: 4;
           // background: linear-gradient(180deg, #34576b 50%, #334740 100%);
         }
         &#page-05 {
-          top: 8rem;
+          // top: 8rem;
           background-color: $col-gray6;
           z-index: 5;
 
           // background: linear-gradient(180deg, #334740 50%, #34576b 100%);
         }
         &#page-06 {
-          top: 8rem;
+          // top: 8rem;
           background-color: $col-gray7;
           z-index: 6;
 
@@ -222,5 +222,42 @@ body {
         }
       }
     }
+  }
+}
+
+.index-page {
+  transition: all 0.5s ease-in-out;
+  .index-story {
+    position: relative;
+  }
+
+  .story-section {
+    min-height: 100dvh;
+    scroll-margin-top: 50px;
+  }
+
+  .story-section--sticky {
+    position: sticky;
+    top: 50px;
+  }
+
+  .story-section--sticky.story-top-100 {
+    top: 100px;
+    scroll-margin-top: 100px;
+  }
+
+  .story-section--sticky.story-top-0 {
+    top: 0;
+    scroll-margin-top: 0;
+  }
+
+  .story-section--fixed {
+    position: relative;
+    min-height: 100dvh;
+  }
+
+  .story-section--fixed .story-section__inner {
+    position: fixed;
+    inset: 0;
   }
 }

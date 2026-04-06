@@ -928,26 +928,6 @@ function IntegratedPick({ allData, latestDrw, seed, onRefresh }) {
     if(r13rank<5) t.push({label:'최근 핫',color:'#f97316'});
     return {n,tags:t};
   });
-  const copyNumbers = async () => {
-    const value = nums.join(', ');
-    try {
-      if (navigator?.clipboard?.writeText) {
-        await navigator.clipboard.writeText(value);
-      } else {
-        const ta = document.createElement('textarea');
-        ta.value = value;
-        ta.style.position = 'fixed';
-        ta.style.left = '-9999px';
-        document.body.appendChild(ta);
-        ta.select();
-        document.execCommand('copy');
-        document.body.removeChild(ta);
-      }
-      alert('추천번호가 복사되었습니다: ' + value);
-    } catch {
-      alert('복사에 실패했습니다. 번호를 수동으로 복사해 주세요.');
-    }
-  };
   const fitBars=[
     {label:'빈도 점수', pct:Math.min(nums.reduce((a,n)=>a+score[n],0)/nums.length/8*100,100),color:'#6366f1'},
     {label:'합계 적합', pct:Math.max(0,100-Math.abs(sum-140)*1.5),color:'#10b981'},
@@ -992,10 +972,7 @@ function IntegratedPick({ allData, latestDrw, seed, onRefresh }) {
           </div>
         ))}
       </div>
-      <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:8}}>
-        <button onClick={copyNumbers} style={{width:'100%',padding:10,borderRadius:10,border:'1px solid #6366f1',cursor:'pointer',background:'#0f172a',color:'#a5b4fc',fontWeight:800,fontSize:14}}>📋 번호 복사</button>
-        <button onClick={onRefresh} style={{width:'100%',padding:10,borderRadius:10,border:'none',cursor:'pointer',background:'linear-gradient(90deg,#6366f1,#8b5cf6,#a855f7)',color:'#fff',fontWeight:800,fontSize:14,boxShadow:'0 2px 12px rgba(99,102,241,.4)'}}>🔮 통합번호 재분석</button>
-      </div>
+      <button onClick={onRefresh} style={{width:'100%',padding:10,borderRadius:10,border:'none',cursor:'pointer',background:'linear-gradient(90deg,#6366f1,#8b5cf6,#a855f7)',color:'#fff',fontWeight:800,fontSize:14,boxShadow:'0 2px 12px rgba(99,102,241,.4)'}}>🔮 통합번호 재분석</button>
     </div>
   );
 }

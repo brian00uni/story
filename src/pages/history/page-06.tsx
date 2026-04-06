@@ -11,6 +11,11 @@ const aboutList = Array.isArray(aboutData) ? (aboutData as AboutItem[]) : [];
 export default function Page06() {
   return (
     <Box className="mainPage page-06">
+       <Box className="category-box">
+                <Typography variant="category" component={'div'}>
+                  666666666666
+                </Typography>
+              </Box>
       <Grid container spacing={2}>
         <Grid size={12}>
           <Typography variant="h3" component="h1">

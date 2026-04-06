@@ -3,6 +3,11 @@ import { Box, Typography } from '@mui/material';
 export default function Page05() {
   return (
     <Box className="mainPage page-05">
+       <Box className="category-box">
+          <Typography variant="category" component={'div'}>
+           55555555555555555555
+          </Typography>
+        </Box>
       <Typography variant="h3" component="h1">
         자신의 가치를 높이고자 노력하는 김형윤입니다.
       </Typography>

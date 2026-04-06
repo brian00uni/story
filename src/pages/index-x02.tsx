@@ -10,77 +10,19 @@ import { Button, ButtonGroup, Stack } from '@mui/material';
 import { useEffect, useMemo, useRef, useState } from 'react';
 // import 'swiper/css';
 
-type SectionItem = {
-  id: string;
-  label: string;
-  top: number;
-  zIndex: number;
-  kind: 'fixed' | 'sticky';
-  className: string;
-  component: JSX.Element;
-};
-
 export default function Main() {
   const setHeaderProps = useSetHeaderProps();
   const sectionRefs = useRef<Array<HTMLDivElement | null>>([]);
   const [activeIndex, setActiveIndex] = useState(0);
 
-  const sections = useMemo<SectionItem[]>(
+  const sections = useMemo(
     () => [
-      {
-        id: 'page-01',
-        label: 'One',
-        top: 0,
-        zIndex: 1,
-        kind: 'fixed',
-        className: 'story-top-0',
-        component: <Page01 />,
-      },
-      {
-        id: 'page-02',
-        label: 'Two',
-        top: 50,
-        zIndex: 2,
-        kind: 'sticky',
-        className: 'story-top-50',
-        component: <Page02 />,
-      },
-      {
-        id: 'page-03',
-        label: 'Three',
-        top: 100,
-        zIndex: 3,
-        kind: 'sticky',
-        className: 'story-top-100',
-        component: <Page03 />,
-      },
-      {
-        id: 'page-04',
-        label: 'Four',
-        top: 50,
-        zIndex: 4,
-        kind: 'sticky',
-        className: 'story-top-50',
-        component: <Page04 />,
-      },
-      {
-        id: 'page-05',
-        label: 'Five',
-        top: 50,
-        zIndex: 5,
-        kind: 'sticky',
-        className: 'story-top-50',
-        component: <Page05 />,
-      },
-      {
-        id: 'page-06',
-        label: 'Six',
-        top: 50,
-        zIndex: 6,
-        kind: 'sticky',
-        className: 'story-top-50',
-        component: <Page06 />,
-      },
+      { id: 'page-01', label: 'One' },
+      { id: 'page-02', label: 'Two' },
+      { id: 'page-03', label: 'Three' },
+      { id: 'page-04', label: 'Four' },
+      { id: 'page-05', label: 'Five' },
+      { id: 'page-06', label: 'Six' },
     ],
     [],
   );
@@ -118,29 +60,60 @@ export default function Main() {
   const handleNavClick = (index: number) => {
     const target = sectionRefs.current[index];
     if (!target) return;
-    const topOffset = sections[index].top;
-    const y = target.getBoundingClientRect().top + window.scrollY - topOffset;
-    window.scrollTo({ top: y, behavior: 'smooth' });
+    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
 
   return (
     <>
-      <Stack spacing={0} className="index-story">
-        {sections.map((section, index) => (
-          <div
-            key={section.id}
-            id={section.id}
-            className={`story-section ${section.className} ${
-              section.kind === 'fixed' ? 'story-section--fixed' : 'story-section--sticky'
-            }`}
-            style={{ zIndex: section.zIndex }}
-            ref={(el) => {
-              sectionRefs.current[index] = el;
-            }}
-          >
-            <div className="story-section__inner">{section.component}</div>
-          </div>
-        ))}
+      <Stack spacing={2}>
+        <div
+          id="page-01"
+          ref={(el) => {
+            sectionRefs.current[0] = el;
+          }}
+        >
+          <Page01 />
+        </div>
+        <div
+          id="page-02"
+          ref={(el) => {
+            sectionRefs.current[1] = el;
+          }}
+        >
+          <Page02 />
+        </div>
+        <div
+          id="page-03"
+          ref={(el) => {
+            sectionRefs.current[2] = el;
+          }}
+        >
+          <Page03 />
+        </div>
+        <div
+          id="page-04"
+          ref={(el) => {
+            sectionRefs.current[3] = el;
+          }}
+        >
+          <Page04 />
+        </div>
+        <div
+          id="page-05"
+          ref={(el) => {
+            sectionRefs.current[4] = el;
+          }}
+        >
+          <Page05 />
+        </div>
+        <div
+          id="page-06"
+          ref={(el) => {
+            sectionRefs.current[5] = el;
+          }}
+        >
+          <Page06 />
+        </div>
       </Stack>
       <ButtonGroup className="nav-page" aria-label="Nav button group">
         {sections.map((section, index) => (
@@ -156,4 +129,3 @@ export default function Main() {
     </>
   );
 }
-
