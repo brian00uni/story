@@ -7,7 +7,7 @@ import Page04 from '@/pages/history/page-04';
 import Page05 from '@/pages/history/page-05';
 import Page06 from '@/pages/history/page-06';
 import { Button, ButtonGroup, Stack } from '@mui/material';
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState, type ReactElement } from 'react';
 // import 'swiper/css';
 
 type SectionItem = {
@@ -17,7 +17,7 @@ type SectionItem = {
   zIndex: number;
   kind: 'fixed' | 'sticky';
   className: string;
-  component: JSX.Element;
+  component: ReactElement;
 };
 
 export default function Main() {
@@ -156,4 +156,5 @@ export default function Main() {
     </>
   );
 }
+
 
