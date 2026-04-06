@@ -4,7 +4,7 @@ import { Box, Stack } from '@mui/material';
 
 import animationData from '@/data/intro.json'; // 로컬 JSON 파일
 import Lottie from 'lottie-react';
-import { useState } from 'react';
+// import { useState } from 'react';
 
 export default function Page01() {
   // const [isPlaying, setIsPlaying] = useState(true);
