@@ -12,8 +12,8 @@ export default defineConfig({
     react(),
     {
       name: 'redirect-story-slash',
-      configureServer(server) {
-        server.middlewares.use((req, res, next) => {
+      configureServer(server: any) {
+        server.middlewares.use((req: any, res: any, next: any) => {
           if (req.url === '/story') {
             res.statusCode = 302;
             res.setHeader('Location', '/story/');
@@ -28,6 +28,12 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': 'http://localhost:3000',
+      '/api/lotto': {
+        target: 'https://www.dhlottery.co.kr',
+        changeOrigin: true,
+        rewrite: (path) =>
+          '/common.do?method=getLottoNumber' + path.split('?')[1]?.replace('drwNo=', '&drwNo='),
+      },
     },
   },
   resolve: {

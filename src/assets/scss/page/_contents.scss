@@ -9,11 +9,11 @@
   @include flex-column;
   width: 100%;
   // height: 100dvh;
-  padding: 7rem 5rem;
+  // padding: 7rem 5rem;
   transition: all 0.3s ease-in-out;
 
   @include bp(sm) {
-    padding: 5rem 2rem;
+    // padding: 5rem 2rem;
   }
   .mainWrap {
     width: 100%;

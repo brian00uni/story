@@ -40,6 +40,7 @@ export default function LayoutPage() {
         <HeaderPropsProvider value={setHeaderProps}>
           <Outlet />
           <SpeedDial
+            className='nav-dial'
             ariaLabel="SpeedDial basic example"
             sx={{ position: 'absolute', bottom: 16, right: 16 }}
             icon={<SpeedDialIcon />}

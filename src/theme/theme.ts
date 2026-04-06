@@ -75,6 +75,7 @@ const theme = createTheme(baseTheme, {
         body: {
           // maxWidth: '120rem',
           fontSize: '1.4rem',
+          letterSpacing: '-0.04em',
           margin: 0,
           color: '#111111',
         },
@@ -127,8 +128,9 @@ const theme = createTheme(baseTheme, {
             fontSize: '4.8rem',
             fontWeight: '900',
             lineHeight: 1,
-            [baseTheme.breakpoints.down('sm')]: {
+            [baseTheme.breakpoints.down('md')]: {
               // backgroundColor: 'red',
+              fontSize: '3.5rem',
             },
           },
         },
@@ -253,7 +255,7 @@ const theme = createTheme(baseTheme, {
         {
           props: { variant: 'cateLine' },
           style: {
-            borderColor: 'rgba(255, 255, 255, 0.1)',
+            borderColor: 'rgba(0, 0, 0, 0.1)',
           },
         },
       ],
