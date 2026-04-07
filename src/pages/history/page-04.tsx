@@ -1,5 +1,8 @@
 import projectsData from '@/data/projects.json';
 import { Box, Divider, Grid, Paper, Typography } from '@mui/material';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
+
 
 type Project = {
   No: number;
@@ -43,7 +46,44 @@ export default function Page04() {
           <Typography variant="h4" component="h2" gutterBottom>
             작업물입니다.
           </Typography>
-          <Grid container spacing={2} className="">
+
+          <Box className="portfolio-wrap">
+          <Swiper spaceBetween={5} slidesPerView={3}>
+            {projects.map((project) => (
+              <SwiperSlide key={project.No} >
+                <Paper elevation={3} sx={{ padding: '1rem' }}>
+                  <Typography variant="h1" component={'div'}>
+                    {project.data.Title}
+                  </Typography>
+                  {resolveProjectImage(project.data.imgSrc ?? '') ? (
+                    <Box sx={{ mt: 1 }}>
+                      <img
+                        src={resolveProjectImage(project.data.imgSrc ?? '') ?? ''}
+                        alt={`${project.data.Title} image`}
+                        style={{ maxWidth: '100%', height: 'auto', display: 'block' }}
+                      />
+                    </Box>
+                  ) : null}
+                  <Typography
+                    variant="body1"
+                    component={'div'}
+                    sx={{ marginTop: '1rem', whiteSpace: 'pre-line' }}
+                  >
+                    {project.data.Description}
+                    {'\n'}- Client: {project.data.Client}
+                    {'\n'}- Duration: {project.data.Duration}
+                    {'\n'}- Team: {project.data.Team}
+                    {'\n'}- Role: {project.data.Role}
+                    {'\n'}- Technology: {project.data.Technology}
+                    {'\n'}- Performed: {project.data.Performed}
+                    {'\n'}- Achievements: {project.data.Achievements}
+                  </Typography>
+                </Paper>
+              </SwiperSlide>
+            ))}
+          </Swiper>
+          </Box>
+          {/* <Grid container spacing={2} className="">
             {projects.map((project) => (
               <Grid key={project.No} size={6}>
                 <Paper elevation={3} sx={{ padding: '1rem' }}>
@@ -76,7 +116,7 @@ export default function Page04() {
                 </Paper>
               </Grid>
             ))}
-          </Grid>
+          </Grid> */}
         </Box>
 
         {/* 경력사항 */}

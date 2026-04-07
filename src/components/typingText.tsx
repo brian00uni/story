@@ -17,6 +17,7 @@ export default function TypingText() {
       cursor={true}
       repeat={Infinity}
       style={{ whiteSpace: 'pre-line', display: 'block' }}
+      className="typing-text"
     />
   );
 }
