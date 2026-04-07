@@ -24,12 +24,11 @@ const marqueeItems = [
   { left: 26, top: -3500, height: 300, scrollAmount: 3, storyText: 'ChakraUI' },
   { left: 22, top: -3800, height: 253, scrollAmount: 6, storyText: 'Sass' },
   { left: 211, top: -4040, height: 325, scrollAmount: 7, storyText: 'Frontend' },
-
   { left: 107, top: -4900, height: 330, scrollAmount: 2, storyText: 'MaterialUI' },
-  { left: 132, top: -5205, height: 331, scrollAmount: 5, storyText: 'Story Text 17' },
-  { left: 57, top: -5500, height: 94, scrollAmount: 5, storyText: 'Story Text 18' },
-  { left: 5, top: -5600, height: 471, storyText: 'Story Text 19' },
-  { left: 317, top: -6003, height: 480, scrollAmount: 5, storyText: 'Story Text 20' },
+  { left: 132, top: -5205, height: 331, scrollAmount: 5, storyText: 'Figma' },
+  { left: 57, top: -5500, height: 94, scrollAmount: 5, storyText: 'Slack' },
+  { left: 5, top: -5600, height: 471, storyText: 'Git' },
+  { left: 317, top: -6003, height: 480, scrollAmount: 5, storyText: 'Adobe Photoshop' },
 ];
 
 export default function Page01() {
