@@ -21,25 +21,25 @@ import type { TypographyPropsVariantOverrides } from '@mui/material/Typography';
 
 declare module '@mui/material/Alert' {
   interface AlertPropsVariantOverrides {
-    // No custom variants found in C:/Users/Sunny/Desktop/Work/story/src/theme/theme.ts
+    // No custom variants found in C:/Users/gccare14/Desktop/test_Work/bulma/story/src/theme/theme.ts
   }
 }
 
 declare module '@mui/material/Avatar' {
   interface AvatarPropsVariantOverrides {
-    // No custom variants found in C:/Users/Sunny/Desktop/Work/story/src/theme/theme.ts
+    // No custom variants found in C:/Users/gccare14/Desktop/test_Work/bulma/story/src/theme/theme.ts
   }
 }
 
 declare module '@mui/material/AvatarGroup' {
   interface AvatarGroupPropsVariantOverrides {
-    // No custom variants found in C:/Users/Sunny/Desktop/Work/story/src/theme/theme.ts
+    // No custom variants found in C:/Users/gccare14/Desktop/test_Work/bulma/story/src/theme/theme.ts
   }
 }
 
 declare module '@mui/material/Badge' {
   interface BadgePropsVariantOverrides {
-    // No custom variants found in C:/Users/Sunny/Desktop/Work/story/src/theme/theme.ts
+    // No custom variants found in C:/Users/gccare14/Desktop/test_Work/bulma/story/src/theme/theme.ts
   }
 }
 
@@ -53,7 +53,7 @@ declare module '@mui/material/Button' {
 
 declare module '@mui/material/ButtonGroup' {
   interface ButtonGroupPropsVariantOverrides {
-    // No custom variants found in C:/Users/Sunny/Desktop/Work/story/src/theme/theme.ts
+    // No custom variants found in C:/Users/gccare14/Desktop/test_Work/bulma/story/src/theme/theme.ts
   }
 }
 
@@ -66,7 +66,7 @@ declare module '@mui/material/Chip' {
 
 declare module '@mui/material/CircularProgress' {
   interface CircularProgressPropsVariantOverrides {
-    // No custom variants found in C:/Users/Sunny/Desktop/Work/story/src/theme/theme.ts
+    // No custom variants found in C:/Users/gccare14/Desktop/test_Work/bulma/story/src/theme/theme.ts
   }
 }
 
@@ -78,7 +78,7 @@ declare module '@mui/material/Divider' {
 
 declare module '@mui/material/Fab' {
   interface FabPropsVariantOverrides {
-    // No custom variants found in C:/Users/Sunny/Desktop/Work/story/src/theme/theme.ts
+    // No custom variants found in C:/Users/gccare14/Desktop/test_Work/bulma/story/src/theme/theme.ts
   }
 }
 
@@ -90,13 +90,13 @@ declare module '@mui/material/FormHelperText' {
 
 declare module '@mui/material/ImageList' {
   interface ImageListPropsVariantOverrides {
-    // No custom variants found in C:/Users/Sunny/Desktop/Work/story/src/theme/theme.ts
+    // No custom variants found in C:/Users/gccare14/Desktop/test_Work/bulma/story/src/theme/theme.ts
   }
 }
 
 declare module '@mui/material/LinearProgress' {
   interface LinearProgressPropsVariantOverrides {
-    // No custom variants found in C:/Users/Sunny/Desktop/Work/story/src/theme/theme.ts
+    // No custom variants found in C:/Users/gccare14/Desktop/test_Work/bulma/story/src/theme/theme.ts
   }
 }
 
@@ -120,19 +120,19 @@ declare module '@mui/material/Paper' {
 
 declare module '@mui/material/Skeleton' {
   interface SkeletonPropsVariantOverrides {
-    // No custom variants found in C:/Users/Sunny/Desktop/Work/story/src/theme/theme.ts
+    // No custom variants found in C:/Users/gccare14/Desktop/test_Work/bulma/story/src/theme/theme.ts
   }
 }
 
 declare module '@mui/material/TableCell' {
   interface TableCellPropsVariantOverrides {
-    // No custom variants found in C:/Users/Sunny/Desktop/Work/story/src/theme/theme.ts
+    // No custom variants found in C:/Users/gccare14/Desktop/test_Work/bulma/story/src/theme/theme.ts
   }
 }
 
 declare module '@mui/material/Toolbar' {
   interface ToolbarPropsVariantOverrides {
-    // No custom variants found in C:/Users/Sunny/Desktop/Work/story/src/theme/theme.ts
+    // No custom variants found in C:/Users/gccare14/Desktop/test_Work/bulma/story/src/theme/theme.ts
   }
 }
 

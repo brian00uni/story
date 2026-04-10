@@ -75,7 +75,7 @@ export default function Page01() {
 
         {/* <img src={lgPhotoshop} alt="Photoshop logo" /> */}
         <Box className="typing-wrap">
-          <TypingText />
+          {/* <TypingText /> */}
         </Box>
 
         {/* <ScrollText /> */}

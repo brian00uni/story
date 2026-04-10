@@ -195,15 +195,15 @@ body {
           // position: relative;
           // top: 20rem;
           // top: 2rem;
-            // display: inline-block;
-          background-image: url('~/assets/images/bg-01.png') ;
+          // display: inline-block;
+          background-image: url('~/assets/images/bg-01.png');
           // background-color: $col-gray9;
           z-index: 2;
           // background: linear-gradient(180deg, #34576b 50%, #334740 100%);
         }
         &#page-03 {
           // top: 4rem;
-           background-image: url('~/assets/images/bg-02.png') ;
+          background-image: url('~/assets/images/bg-02.png');
           // background-color: $col-gray8;
           z-index: 3;
           // background: linear-gradient(180deg, #334740 50%, #34576b 100%);
@@ -232,8 +232,6 @@ body {
     }
   }
 }
-
-
 
 .index-page {
   transition: all 0.5s ease-in-out;
@@ -300,9 +298,6 @@ body {
   }
 }
 
-
-
-
 .index-page {
   body {
     overflow: hidden;
@@ -317,7 +312,9 @@ body {
 
   .index-story.is-staged .story-section {
     width: 100%;
-    transition: top 0.45s ease, opacity 0.35s ease;
+    transition:
+      top 0.45s ease,
+      opacity 0.35s ease;
   }
 
   .index-story.is-staged .story-section--fixed {
@@ -348,23 +345,28 @@ body {
     pointer-events: none;
   }
 
+  // page 02
   .index-story.is-staged .story-section--float.is-pinned.story-pin-50 {
-    top: 50px;
+    top: 0px;
   }
 
+  // page 03
   .index-story.is-staged .story-section--float.is-pinned.story-pin-100 {
-    top: 100px;
+    top: 30px;
   }
 
+  // page 04
   .index-story.is-staged .story-section--float.is-pinned.story-pin-150 {
-    top: 150px;
+    top: 60px;
   }
 
+  // page 05
   .index-story.is-staged .story-section--float.is-pinned.story-pin-180 {
-    top: 180px;
+    top: 90px;
   }
 
+  // page 06
   .index-story.is-staged .story-section--float.is-pinned.story-pin-210 {
-    top: 210px;
+    top: 120px;
   }
 }

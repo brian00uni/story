@@ -1,17 +1,5 @@
-import pg from 'pg';
-
-const { Pool } = pg;
-
-const connectionString = process.env.DATABASE_URL;
-const isRenderConnection = connectionString?.includes('render.com');
-const useMemoryDb =
-  process.env.USE_MEMORY_DB === '1' || !connectionString || isRenderConnection;
-
-export const pool = useMemoryDb
-  ? null
-  : new Pool({
-      connectionString,
-    });
+const useMemoryDb = true;
+export const pool = null;
 export { useMemoryDb };
 
 export async function ensureBoardTable({ timeoutMs = 5000 } = {}) {
