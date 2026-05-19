@@ -176,14 +176,26 @@ const PUBLIC_PROXIES = [
   (url) => `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`,
   (url) => `https://corsproxy.io/?${encodeURIComponent(url)}`,
 ];
+const KOKOMEL_LIST_URL = 'https://lotto.kokomel.com/lottos';
+
+let kokomelListPromise = null;
 
 async function tryFetch(url, timeout = 8000) {
+  const text = await tryFetchText(url, timeout);
+  try {
+    return JSON.parse(text);
+  } catch {
+    throw new Error('JSON 응답 아님');
+  }
+}
+
+async function tryFetchText(url, timeout = 8000) {
   const res = await fetch(url, {
     cache: 'no-store',
     signal: AbortSignal.timeout(timeout),
   });
   if (!res.ok) throw new Error(`HTTP ${res.status}`);
-  return res.json();
+  return res.text();
 }
 
 function parseDrawJson(j) {
@@ -214,7 +226,47 @@ async function fetchOneDraw(drwNo) {
     } catch { /* 다음 프록시 시도 */ }
   }
 
+  try {
+    const d = await fetchFromKokomel(drwNo);
+    if (d) return d;
+  } catch { /* 마지막 공식 API 실패 메시지 유지 */ }
+
   throw new Error('모든 프록시 실패');
+}
+
+async function fetchKokomelListText() {
+  if (!kokomelListPromise) {
+    kokomelListPromise = (async () => {
+      try {
+        return await tryFetchText(KOKOMEL_LIST_URL, 10000);
+      } catch {
+        for (const proxy of PUBLIC_PROXIES) {
+          try {
+            return await tryFetchText(proxy(KOKOMEL_LIST_URL), 10000);
+          } catch { /* 다음 프록시 시도 */ }
+        }
+        throw new Error('Kokomel 조회 실패');
+      }
+    })();
+  }
+  return kokomelListPromise;
+}
+
+async function fetchFromKokomel(drwNo) {
+  const html = await fetchKokomelListText();
+  const text = html
+    .replace(/<[^>]*>/g, ' ')
+    .replace(/&nbsp;/g, ' ')
+    .replace(/\s+/g, ' ');
+  const re = new RegExp(`제\\s*${drwNo}\\s*회\\s*(\\d{4})년\\s*(\\d{2})월\\s*(\\d{2})일(?:\\s*추첨)?\\s+((?:\\d{1,2}\\s+){6})\\+\\s*(\\d{1,2})`);
+  const match = text.match(re);
+  if (!match) return null;
+  return {
+    drw: drwNo,
+    nums: match[4].trim().split(/\s+/).map(Number).sort((a, b) => a - b),
+    bonus: Number(match[5]),
+    date: `${match[1]}-${match[2]}-${match[3]}`,
+  };
 }
 
 // ══════════════════════════════════════════════════════════════
@@ -271,17 +323,42 @@ function mergeWithCache(cacheArr) {
 }
 
 // ══════════════════════════════════════════════════════════════
-// § 5. 자동 업데이트 타이머 (일요일 KST 21:35)
+// § 5. 자동 업데이트 타이머 (토요일 KST 21:35)
 // ══════════════════════════════════════════════════════════════
-function msUntilNextSundayDraw() {
+const FIRST_DRAW_DATE_KST = '2002-12-07T00:00:00+09:00';
+const DRAW_RESULT_OPEN_HOUR_KST = 21;
+const DRAW_RESULT_OPEN_MINUTE_KST = 35;
+
+function toKstDate(now = new Date()) {
+  return new Date(now.getTime() + 9 * 60 * 60 * 1000);
+}
+
+function getExpectedLatestDraw(now = new Date()) {
+  const first = new Date(FIRST_DRAW_DATE_KST).getTime();
+  const kst = toKstDate(now);
+  const lastSaturday = new Date(kst);
+  const day = kst.getUTCDay(); // 0=일, 6=토
+  const daysSinceSaturday = (day + 1) % 7;
+  lastSaturday.setUTCDate(kst.getUTCDate() - daysSinceSaturday);
+  lastSaturday.setUTCHours(DRAW_RESULT_OPEN_HOUR_KST, DRAW_RESULT_OPEN_MINUTE_KST, 0, 0);
+
+  if (kst < lastSaturday) {
+    lastSaturday.setUTCDate(lastSaturday.getUTCDate() - 7);
+  }
+
+  const drawNo = Math.floor((lastSaturday.getTime() - first) / (7 * 24 * 60 * 60 * 1000)) + 1;
+  return Math.max(BASE_LATEST_DRW, drawNo);
+}
+
+function msUntilNextDrawUpdate() {
   const now       = new Date();
-  const kstOffset = 9 * 60 * 60 * 1000;
-  const kst       = new Date(now.getTime() + kstOffset);
-  const day       = kst.getUTCDay(); // 0=일
-  const daysUntil = day === 0 ? 7 : 7 - day;
+  const kst       = toKstDate(now);
+  const day       = kst.getUTCDay(); // 0=일, 6=토
+  const daysUntil = day === 6 ? 0 : 6 - day;
   const next      = new Date(kst);
   next.setUTCDate(kst.getUTCDate() + daysUntil);
-  next.setUTCHours(12, 35, 0, 0); // UTC 12:35 = KST 21:35
+  next.setUTCHours(DRAW_RESULT_OPEN_HOUR_KST, DRAW_RESULT_OPEN_MINUTE_KST, 0, 0);
+  if (next <= kst) next.setUTCDate(next.getUTCDate() + 7);
   return Math.max(next - kst, 0);
 }
 
@@ -403,6 +480,141 @@ function genStrategies(data, latestDrw, seed) {
     }
     return null;
   }).filter(Boolean);
+}
+
+function analyzePick(nums) {
+  const sum  = nums.reduce((a, b) => a + b, 0);
+  const odd  = nums.filter(n => n % 2 === 1).length;
+  const low  = nums.filter(n => n <= 22).length;
+  const zones = [0, 0, 0, 0, 0];
+  nums.forEach(n => { zones[n <= 9 ? 0 : n <= 19 ? 1 : n <= 29 ? 2 : n <= 39 ? 3 : 4]++; });
+  let maxRun = 1, run = 1;
+  for (let i = 1; i < nums.length; i++) {
+    if (nums[i] === nums[i - 1] + 1) { run++; maxRun = Math.max(maxRun, run); } else run = 1;
+  }
+  return { sum, odd, even: 6 - odd, low, high: 6 - low, zones, maxRun };
+}
+
+function isBalancedPick(nums) {
+  const { sum, odd, low, zones, maxRun } = analyzePick(nums);
+  return sum >= 105 && sum <= 175
+    && odd >= 2 && odd <= 4
+    && low >= 2 && low <= 4
+    && zones.filter(Boolean).length >= 4
+    && maxRun <= 2;
+}
+
+function genCodexAiPick(data, latestDrw, seed) {
+  const all45 = Array.from({ length:45 }, (_, i) => i + 1);
+  const rand = seededRand(seed);
+  const { score, absence, f13 } = buildScoreMap(data, latestDrw);
+  const recent = data.slice(-10);
+  const recentSet = new Set(recent.flatMap(d => d.nums));
+  const weighted = all45.map(n => {
+    const freshness = recentSet.has(n) ? 0.9 : 1.12;
+    const noise = 0.82 + rand() * 0.42;
+    return {
+      n,
+      w: (score[n] * 0.45 + absence[n - 1] * 0.9 + f13[n] * 1.4 + 8) * freshness * noise,
+    };
+  });
+
+  let best = null, bestFit = -Infinity;
+  for (let att = 0; att < 2500; att++) {
+    const pool = [...weighted].sort((a, b) => (b.w * (0.9 + rand() * 0.2)) - (a.w * (0.9 + rand() * 0.2)));
+    const nums = pool.slice(0, 18).sort(() => rand() - 0.5).slice(0, 6).map(v => v.n).sort((a, b) => a - b);
+    if (!isBalancedPick(nums)) continue;
+    const p = analyzePick(nums);
+    const fit = nums.reduce((a, n) => a + score[n], 0)
+      + nums.reduce((a, n) => a + Math.min(absence[n - 1], 18), 0) * 0.45
+      - Math.abs(p.sum - 140) * 0.35
+      + p.zones.filter(Boolean).length * 3;
+    if (fit > bestFit) { bestFit = fit; best = { nums, ...p }; }
+  }
+
+  if (best) return {
+    ...best,
+    notes: ['Codex 랜덤 시드', '합계·홀짝·구간 균형', '최근 과열 번호 일부 완화'],
+  };
+
+  const nums = all45.sort(() => rand() - 0.5).slice(0, 6).sort((a, b) => a - b);
+  return { nums, ...analyzePick(nums), notes: ['Codex 랜덤 시드', '기본 랜덤 조합'] };
+}
+
+function genRecentAnalysisPick(data, latestDrw, seed) {
+  const all45 = Array.from({ length:45 }, (_, i) => i + 1);
+  const rand = seededRand(seed);
+  const recent = data.slice(-10);
+  const last = recent[recent.length - 1];
+  const freq10 = getFrequency(recent);
+  const lastSeen = new Array(46).fill(0);
+  const pair = Array.from({ length:46 }, () => new Array(46).fill(0));
+
+  recent.forEach(({ drw, nums }) => {
+    nums.forEach(n => { lastSeen[n] = Math.max(lastSeen[n], drw); });
+    for (let i = 0; i < nums.length; i++) {
+      for (let j = i + 1; j < nums.length; j++) {
+        pair[nums[i]][nums[j]]++;
+        pair[nums[j]][nums[i]]++;
+      }
+    }
+  });
+
+  const rows = all45.map(n => {
+    const gap = lastSeen[n] ? latestDrw - lastSeen[n] : 10;
+    const termScore = gap >= 3 && gap <= 8 ? 8 : gap >= 9 ? 5 : gap === 2 ? 3 : -2;
+    const repeatScore = last?.nums.includes(n) ? 5 : 0;
+    return {
+      n,
+      gap,
+      score: freq10[n] * 5 + termScore + repeatScore + rand() * 2,
+      hot: freq10[n],
+      repeated: Boolean(last?.nums.includes(n)),
+    };
+  });
+
+  const hotPool = [...rows].sort((a, b) => b.hot - a.hot || b.score - a.score).slice(0, 14);
+  const termPool = [...rows].sort((a, b) => b.gap - a.gap || b.score - a.score).slice(0, 16);
+  const repeatPool = rows.filter(r => r.repeated);
+  let best = null, bestFit = -Infinity;
+
+  for (let att = 0; att < 3000; att++) {
+    const pk = new Set();
+    const repeatTarget = repeatPool.length ? 1 + Math.floor(rand() * Math.min(2, repeatPool.length)) : 0;
+    [...repeatPool].sort(() => rand() - 0.5).slice(0, repeatTarget).forEach(r => pk.add(r.n));
+    [...hotPool].sort(() => rand() - 0.5).forEach(r => { if (pk.size < 3) pk.add(r.n); });
+    [...termPool].sort(() => rand() - 0.5).forEach(r => { if (pk.size < 5) pk.add(r.n); });
+    [...rows].sort((a, b) => b.score - a.score).forEach(r => { if (pk.size < 6) pk.add(r.n); });
+
+    const nums = Array.from(pk).slice(0, 6).sort((a, b) => a - b);
+    if (!isBalancedPick(nums)) continue;
+    const p = analyzePick(nums);
+    const overlap = last ? nums.filter(n => last.nums.includes(n)).length : 0;
+    if (overlap < 1 || overlap > 2) continue;
+    const pairFit = nums.reduce((acc, n, i) => acc + nums.slice(i + 1).reduce((s, m) => s + pair[n][m], 0), 0);
+    const fit = nums.reduce((a, n) => a + rows.find(r => r.n === n).score, 0)
+      + pairFit * 2
+      - Math.abs(p.sum - 140) * 0.3
+      + (overlap === 1 ? 4 : 2);
+    if (fit > bestFit) { bestFit = fit; best = { nums, ...p, overlap, pairFit }; }
+  }
+
+  if (!best) {
+    const nums = [...rows].sort((a, b) => b.score - a.score).slice(0, 6).map(r => r.n).sort((a, b) => a - b);
+    best = { nums, ...analyzePick(nums), overlap: last ? nums.filter(n => last.nums.includes(n)).length : 0, pairFit: 0 };
+  }
+
+  const selected = best.nums.map(n => rows.find(r => r.n === n));
+  const hotCount = selected.filter(r => r.hot >= 2).length;
+  const termCount = selected.filter(r => r.gap >= 3).length;
+  return {
+    ...best,
+    notes: [
+      `최근 10회 중복 ${best.overlap}개`,
+      `3회 이상 텀 ${termCount}개`,
+      `최근 10회 2번 이상 출현 ${hotCount}개`,
+    ],
+  };
 }
 
 // ══════════════════════════════════════════════════════════════
@@ -573,11 +785,12 @@ function ManualInputForm({ latestDrw, onAdd }) {
 // § 9. 업데이트 탭
 // ══════════════════════════════════════════════════════════════
 function UpdateTab({ allData, latestDrw, status, log, lastFetch, onUpdate, onManualAdd, onClearCache }) {
-  const [remain, setRemain] = useState(() => msUntilNextSundayDraw());
+  const [remain, setRemain] = useState(() => msUntilNextDrawUpdate());
   useEffect(() => {
-    const id = setInterval(() => setRemain(msUntilNextSundayDraw()), 60_000);
+    const id = setInterval(() => setRemain(msUntilNextDrawUpdate()), 60_000);
     return () => clearInterval(id);
   }, []);
+  const expectedLatestDrw = getExpectedLatestDraw();
   const hh = Math.floor(remain / 3_600_000);
   const mm = Math.floor((remain % 3_600_000) / 60_000);
   const lastStr = lastFetch
@@ -592,6 +805,7 @@ function UpdateTab({ allData, latestDrw, status, log, lastFetch, onUpdate, onMan
           {[
             ['총 회차',    `${allData.length}회`],
             ['최신 회차',  `제 ${latestDrw}회`],
+            ['업데이트 대상', `제 ${expectedLatestDrw}회`],
             ['마지막 갱신', lastStr.split(' ')[0] || '없음'],
             ['갱신 시각',  lastStr.split(' ')[1] || '-'],
           ].map(([l, v]) => (
@@ -626,7 +840,7 @@ function UpdateTab({ allData, latestDrw, status, log, lastFetch, onUpdate, onMan
         <div style={{ display:'flex', gap:14, alignItems:'center', marginBottom:10 }}>
           <span style={{ fontSize:36 }}>🗓</span>
           <div>
-            <div style={{ fontSize:14, fontWeight:700, color:'#fbbf24' }}>매주 일요일 오후 9:35 (KST)</div>
+            <div style={{ fontSize:14, fontWeight:700, color:'#fbbf24' }}>매주 토요일 오후 9:35 (KST)</div>
             <div style={{ fontSize:12, color:'#94a3b8', marginTop:3 }}>로또 추첨 직후 자동으로 당첨번호를 불러옵니다</div>
           </div>
         </div>
@@ -1000,12 +1214,93 @@ function IntegratedPick({ allData, latestDrw, seed, onRefresh }) {
   );
 }
 
+function SimpleRecommendBox({ title, subtitle, pick, onRefresh, accent = '#6366f1' }) {
+  if (!pick) return null;
+  const copyNumbers = async () => {
+    const value = pick.nums.join(', ');
+    try {
+      if (navigator?.clipboard?.writeText) {
+        await navigator.clipboard.writeText(value);
+      } else {
+        const ta = document.createElement('textarea');
+        ta.value = value;
+        ta.style.position = 'fixed';
+        ta.style.left = '-9999px';
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy');
+        document.body.removeChild(ta);
+      }
+      alert('추천번호가 복사되었습니다: ' + value);
+    } catch {
+      alert('복사에 실패했습니다. 번호를 수동으로 복사해 주세요.');
+    }
+  };
+  return (
+    <Card title={title} accent={accent} style={{background:'linear-gradient(135deg,#171b2d,#111827)'}}>
+      <div style={{display:'flex',justifyContent:'space-between',alignItems:'flex-start',gap:10,marginBottom:12}}>
+        <div style={{fontSize:11,color:'#94a3b8',lineHeight:1.5}}>{subtitle}</div>
+        <div style={{fontSize:10,color:accent,fontWeight:800,background:'#0f172a',borderRadius:20,padding:'4px 9px',whiteSpace:'nowrap'}}>제 {pick.targetDrw}회</div>
+      </div>
+      <div style={{display:'flex',alignItems:'center',justifyContent:'center',flexWrap:'wrap',gap:4,marginBottom:12}}>
+        {pick.nums.map(n => <Ball key={n} n={n} size={40}/>)}
+      </div>
+      <div style={{display:'flex',gap:6,flexWrap:'wrap',justifyContent:'center',marginBottom:12}}>
+        {[
+          ['합계', pick.sum],
+          ['홀짝', `홀${pick.odd}짝${pick.even}`],
+          ['고저', `저${pick.low}고${pick.high}`],
+          ['연속', `${pick.maxRun}개`],
+        ].map(([label, value]) => (
+          <div key={label} style={{background:'#0f172a',borderRadius:8,padding:'5px 9px',textAlign:'center',border:'1px solid #26324a'}}>
+            <div style={{fontSize:9,color:'#64748b'}}>{label}</div>
+            <div style={{fontSize:12,fontWeight:800,color:'#c4b5fd'}}>{value}</div>
+          </div>
+        ))}
+      </div>
+      <div style={{display:'flex',flexWrap:'wrap',gap:5,marginBottom:12,justifyContent:'center'}}>
+        {pick.notes.map(note => (
+          <span key={note} style={{fontSize:10,fontWeight:700,padding:'3px 8px',borderRadius:20,background:`${accent}22`,color:accent,border:`1px solid ${accent}44`}}>{note}</span>
+        ))}
+      </div>
+      <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:8}}>
+        <button onClick={copyNumbers} style={{width:'100%',padding:10,borderRadius:8,border:`1px solid ${accent}`,background:'#0f172a',color:accent,fontWeight:800,cursor:'pointer',fontSize:13}}>번호 복사</button>
+        <button onClick={onRefresh} style={{width:'100%',padding:10,borderRadius:8,border:'none',background:accent,color:'#0f172a',fontWeight:800,cursor:'pointer',fontSize:13}}>새 번호 생성</button>
+      </div>
+    </Card>
+  );
+}
+
 function RecommendTab({ allData, latestDrw }) {
   const [intSeed,setIntSeed]=useState(()=>Date.now()&0xffffff);
   const [stratSeed,setStratSeed]=useState(()=>(Date.now()+1)&0xffffff);
+  const [aiSeed,setAiSeed]=useState(()=>(Date.now()+2)&0xffffff);
+  const [recentSeed,setRecentSeed]=useState(()=>(Date.now()+3)&0xffffff);
+  const aiPick=useMemo(()=>({
+    ...genCodexAiPick(allData,latestDrw,aiSeed),
+    targetDrw: latestDrw + 1,
+  }),[allData,latestDrw,aiSeed]);
+  const recentPick=useMemo(()=>({
+    ...genRecentAnalysisPick(allData,latestDrw,recentSeed),
+    targetDrw: latestDrw + 1,
+  }),[allData,latestDrw,recentSeed]);
   const combos=useMemo(()=>genStrategies(allData,latestDrw,stratSeed),[allData,latestDrw,stratSeed]);
   return (
     <div>
+      <SimpleRecommendBox
+        title="🤖 AI 추천번호"
+        subtitle="Codex가 확률 균형을 깨지 않는 선에서 임의 시드로 생성한 추천 조합입니다."
+        pick={aiPick}
+        accent="#22c55e"
+        onRefresh={()=>setAiSeed(Date.now()&0xffffff)}
+      />
+      <SimpleRecommendBox
+        title="🧠 최근 분석 추천번호"
+        subtitle="최근 10회 당첨번호 기준으로 출현 빈도, 번호 간 텀, 직전 회차 중복, 조합 패턴을 반영했습니다."
+        pick={recentPick}
+        accent="#f59e0b"
+        onRefresh={()=>setRecentSeed(Date.now()&0xffffff)}
+      />
       <IntegratedPick allData={allData} latestDrw={latestDrw} seed={intSeed} onRefresh={()=>setIntSeed(Date.now()&0xffffff)}/>
       <Card title={`🎯 전략별 추천번호 (제 ${latestDrw+1}회)`} accent="#6366f1">
         <div style={{fontSize:11,color:'#64748b',marginBottom:12}}>전체빈도 30% · 최근1년 50% · 최근3개월 80% · 미출현 보너스 반영</div>
@@ -1094,10 +1389,18 @@ export default function LottoPage() {
     const cache    = ls.get(LS_CACHE, []);
     const cacheMap = new Map(cache.map(d => [d.drw, d]));
     const newLog   = [];
+    const targetDrw = getExpectedLatestDraw();
     let cur = fromDrw + 1, fetched = 0, failStreak = 0;
 
-    // eslint-disable-next-line no-constant-condition
-    while (true) {
+    if (fromDrw >= targetDrw) {
+      ls.set(LS_LAST_FETCH, Date.now());
+      setLastFetch(Date.now());
+      setStatus('success');
+      setLog(prev => [`ℹ️ 새 회차 없음 (최신: 제 ${fromDrw}회)`, ...prev].slice(0, 60));
+      return;
+    }
+
+    while (cur <= targetDrw) {
       if (cacheMap.has(cur)) { cur++; failStreak = 0; continue; }
       try {
         const d = await fetchOneDraw(cur);
@@ -1149,7 +1452,7 @@ export default function LottoPage() {
   // 자동 스케줄
   useEffect(() => {
     const schedule = () => {
-      const ms = msUntilNextSundayDraw();
+      const ms = msUntilNextDrawUpdate();
       timerRef.current = setTimeout(async () => {
         await doFetch(ls.get(LS_LATEST, BASE_LATEST_DRW), true);
         schedule();
